@@ -19,6 +19,8 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class PasswordHash {
 
+    ////
+    ////
     
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
