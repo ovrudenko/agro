@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.RefActual" schema="public" table="ref_actual">
+    <id name="idActual" type="int">
+      <column name="id_actual"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column name="name"/>
+    </property>
+    <set inverse="true" name="statAdvertActualities">
+      <key>
+        <column name="id_actual"/>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.StatAdvertActuality"/>
+    </set>
+  </class>
+</hibernate-mapping>

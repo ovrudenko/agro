@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.RefVolumeType" schema="public" table="ref_volume_type">
+    <id name="idVolumeType" type="int">
+      <column name="id_volume_type"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="shortName" type="string">
+      <column name="short_name">
+        <comment>ñîêðàùåííîå íàçâàíèå</comment>
+      </column>
+    </property>
+    <property name="fullName" type="string">
+      <column name="full_name">
+        <comment>ïîëíîå íàçâàíèå</comment>
+      </column>
+    </property>
+    <set inverse="true" name="statAdvertStories">
+      <key>
+        <column name="id_volume_type">
+          <comment>çíà÷åíèå îáúåìà</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.StatAdvertStory"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.Person" schema="public" table="person">
+    <comment>Ïðîôèëü ïîëüçîâàòåëÿ</comment>
+    <id name="idPerson" type="int">
+      <column name="id_person"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="com.onebutton.db.hibernate.Organization" fetch="select" name="organization">
+      <column name="id_organization">
+        <comment>ññûëêà íà îðãàíèçàöèþ</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.Customer" fetch="select" name="customer">
+      <column name="id_user">
+        <comment>ññûëêà íà ïîëüçîâàòåëÿ</comment>
+      </column>
+    </many-to-one>
+    <property name="name" type="string">
+      <column name="name">
+        <comment>Èìÿ ïîëüçîâàòåëÿ</comment>
+      </column>
+    </property>
+    <property name="surname" type="string">
+      <column name="surname">
+        <comment>Ôàìèëèÿ ïîëüçîâàòåëÿ</comment>
+      </column>
+    </property>
+    <property name="patrenemic" type="string">
+      <column name="patrenemic">
+        <comment>Îò÷åñòâî ïîëüçîâàòåëÿ</comment>
+      </column>
+    </property>
+    <set inverse="true" name="customers">
+      <key>
+        <column name="id_person"/>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.Customer"/>
+    </set>
+    <set inverse="true" name="telephones">
+      <key>
+        <column name="id_person"/>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.Telephone"/>
+    </set>
+  </class>
+</hibernate-mapping>

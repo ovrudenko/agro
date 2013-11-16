@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="agro" match-schema="public"/>
+  <table-filter match-name="advert"/>
+  <table-filter match-name="organization"/>
+  <table-filter match-name="telephone"/>
+  <table-filter match-name="ref_volume_type"/>
+  <table-filter match-name="ref_advert_type"/>
+  <table-filter match-name="stat_advert_actuality"/>
+  <table-filter match-name="customer"/>
+  <table-filter match-name="ref_role"/>
+  <table-filter match-name="ref_actual"/>
+  <table-filter match-name="stat_advert_story"/>
+  <table-filter match-name="person"/>
+  <table-filter match-name="ref_product"/>
+  <table-filter match-name="ref_area"/>
+</hibernate-reverse-engineering>

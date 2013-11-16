@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.RefProduct" schema="public" table="ref_product">
+    <id name="idProduct" type="int">
+      <column name="id_product"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column name="name"/>
+    </property>
+    <set inverse="true" name="adverts">
+      <key>
+        <column name="id_product">
+          <comment>ññûëêà íà íàçâàíèå
+                    ïðîäóêòà</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
+    </set>
+  </class>
+</hibernate-mapping>

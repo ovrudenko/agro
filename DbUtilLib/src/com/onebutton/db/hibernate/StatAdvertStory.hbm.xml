@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.StatAdvertStory" schema="public" table="stat_advert_story">
+    <id name="idAdvStory" type="int">
+      <column name="id_adv_story"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.onebutton.db.hibernate.Advert" fetch="select" name="advert">
+      <column name="id_advert" not-null="true">
+        <comment>ññûëêà íà ñîîáùåíèå</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.RefVolumeType" fetch="select" name="refVolumeType">
+      <column name="id_volume_type">
+        <comment>çíà÷åíèå îáúåìà</comment>
+      </column>
+    </many-to-one>
+    <property name="date" type="timestamp">
+      <column length="35" name="date">
+        <comment>äàòà çàïèñè</comment>
+      </column>
+    </property>
+    <property name="minPrice" type="java.lang.Double">
+      <column name="min_price" scale="0">
+        <comment>ìèíèìàëüíàÿ öåíà</comment>
+      </column>
+    </property>
+    <property name="maxPrice" type="java.lang.Double">
+      <column name="max_price" scale="0">
+        <comment>ìàêñèìàëüíàÿ öåíà</comment>
+      </column>
+    </property>
+    <property name="minVolume" type="java.lang.Double">
+      <column name="min_volume" precision="17" scale="17">
+        <comment>ìèíèìàëüíûé îáúåì</comment>
+      </column>
+    </property>
+    <property name="maxVolume" type="java.lang.Double">
+      <column name="max_volume" precision="17" scale="17">
+        <comment>ìàêñèìàëüíûé îáúåì</comment>
+      </column>
+    </property>
+    <property name="isDelete" type="java.lang.Boolean">
+      <column name="is_delete"/>
+    </property>
+  </class>
+</hibernate-mapping>

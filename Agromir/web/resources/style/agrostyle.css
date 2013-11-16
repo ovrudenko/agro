@@ -1,0 +1,53 @@
+/* 
+    Document   : agrostyle
+    Created on : 16.06.2013, 19:56:20
+    Author     : lolka
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#header{
+    position: absolute;
+    top: 10px; /* Положение от нижнего края */
+    right: 10px; /* Положение от правого края */
+    line-height: 1px;
+}
+#left-frame{
+    margin-top: 10px;
+    background:oldlace;
+    width:190px;
+    height:300px;
+    float:left;
+}
+
+#centre{
+    margin-top: 10px;
+    background:oldlace;
+    width:525px;
+    height:300px;
+    float: left;
+}
+
+#content{
+    margin-top: 20px;
+    margin: 0 auto;
+    width:525px;
+    height:300px;
+}
+
+#right-frame{
+    margin-top: 10px;
+background:yellow;
+width:150px;
+height:280px;
+float:right;
+}
+
+#bottom{
+    background:darkred;
+    width:715px;
+    height:30px;
+}
+
+
+

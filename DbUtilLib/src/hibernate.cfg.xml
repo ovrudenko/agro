@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/agro</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">12345678</property>
+    <mapping resource="com/onebutton/db/hibernate/StatAdvertStory.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/Organization.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/Customer.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/Person.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/Advert.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefActual.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefAdvertType.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefProduct.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefRole.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefVolumeType.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/Telephone.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/StatAdvertActuality.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefArea.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

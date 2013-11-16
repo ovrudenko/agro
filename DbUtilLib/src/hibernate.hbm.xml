@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.Advert" table="advert"/>
+  <class name="com.onebutton.db.hibernate.Customer" table="customer"/>
+  <class name="com.onebutton.db.hibernate.Organization" table="organization"/>
+  <class name="com.onebutton.db.hibernate.RefActual" table="ref_actual"/>
+  <class name="com.onebutton.db.hibernate.RefAdvertType" table="ref_advert_type"/>
+  <class name="com.onebutton.db.hibernate.RefArea" table="ref_area"/>
+  <class name="com.onebutton.db.hibernate.RefProduct" table="ref_product"/>
+  <class name="com.onebutton.db.hibernate.RefRole" table="ref_role"/>
+  <class name="com.onebutton.db.hibernate.RefVolumeType" table="ref_volume_type"/>
+  <class name="com.onebutton.db.hibernate.StatAdvertActuality" table="stat_advert_actuality"/>
+  <class name="com.onebutton.db.hibernate.StatAdvertStory" table="stat_advert_story"/>
+  <class name="com.onebutton.db.hibernate.Telephone" table="telephone"/>
+</hibernate-mapping>

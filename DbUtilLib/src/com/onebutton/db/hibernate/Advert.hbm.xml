@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.Advert" schema="public" table="advert">
+    <id name="idAdvert" type="int">
+      <column name="id_advert"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.onebutton.db.hibernate.Organization" fetch="select" name="organization">
+      <column name="id_organization">
+        <comment>ññûëêà íà îðãàíèçàöèþ</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.RefProduct" fetch="select" name="refProduct">
+      <column name="id_product">
+        <comment>ññûëêà íà íàçâàíèå
+                ïðîäóêòà</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.RefArea" fetch="select" name="refArea">
+      <column name="id_area"/>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.RefAdvertType" fetch="select" name="refAdvertType">
+      <column name="id_advert_type">
+        <comment>òèï ñîîáùåíèÿ</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.Customer" fetch="select" name="customer">
+      <column name="id_user">
+        <comment>ññûëêà íà ïîëüçîâàòåëÿ</comment>
+      </column>
+    </many-to-one>
+    <property name="text" type="string">
+      <column name="text">
+        <comment>òåêñò ñîîáùåíèÿ</comment>
+      </column>
+    </property>
+    <property name="dateCreate" type="timestamp">
+      <column length="35" name="date_create">
+        <comment>äàòà ñîçäàíèÿ îáúÿâëåíèÿ</comment>
+      </column>
+    </property>
+    <property name="isDelete" type="java.lang.Boolean">
+      <column name="is_delete"/>
+    </property>
+    <set inverse="true" name="statAdvertStories">
+      <key>
+        <column name="id_advert" not-null="true">
+          <comment>ññûëêà íà ñîîáùåíèå</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.StatAdvertStory"/>
+    </set>
+    <set inverse="true" name="statAdvertActualities">
+      <key>
+        <column name="id_advert">
+          <comment>ññûëêà íà ñîîáùåíèå</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.StatAdvertActuality"/>
+    </set>
+  </class>
+</hibernate-mapping>

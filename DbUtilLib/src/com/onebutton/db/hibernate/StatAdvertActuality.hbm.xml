@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.StatAdvertActuality" schema="public" table="stat_advert_actuality">
+    <id name="idAdvActuality" type="int">
+      <column name="id_adv_actuality"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.onebutton.db.hibernate.Advert" fetch="select" name="advert">
+      <column name="id_advert">
+        <comment>ññûëêà íà ñîîáùåíèå</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="com.onebutton.db.hibernate.RefActual" fetch="select" name="refActual">
+      <column name="id_actual"/>
+    </many-to-one>
+    <property name="startDate" type="timestamp">
+      <column length="35" name="start_date">
+        <comment>äàòà íà÷àëà</comment>
+      </column>
+    </property>
+    <property name="stopDate" type="timestamp">
+      <column length="35" name="stop_date">
+        <comment>äàòà çàâåðøåíèÿ</comment>
+      </column>
+    </property>
+    <property name="isDelete" type="java.lang.Boolean">
+      <column name="is_delete"/>
+    </property>
+  </class>
+</hibernate-mapping>

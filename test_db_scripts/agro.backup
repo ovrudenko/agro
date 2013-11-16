@@ -1,0 +1,1730 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.1
+-- Dumped by pg_dump version 9.1.1
+-- Started on 2013-11-10 17:26:28
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 189 (class 3079 OID 11638)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2000 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = true;
+
+--
+-- TOC entry 161 (class 1259 OID 17718)
+-- Dependencies: 6
+-- Name: advert; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE advert (
+    id_advert integer NOT NULL,
+    id_advert_type integer,
+    id_user integer,
+    id_organization integer,
+    text text,
+    id_product integer,
+    date_create timestamp with time zone,
+    is_delete boolean,
+    id_area integer
+);
+
+
+ALTER TABLE public.advert OWNER TO postgres;
+
+--
+-- TOC entry 2001 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.id_advert; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.id_advert IS 'id объявления';
+
+
+--
+-- TOC entry 2002 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.id_advert_type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.id_advert_type IS 'тип сообщения';
+
+
+--
+-- TOC entry 2003 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.id_user; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.id_user IS 'ссылка на пользователя';
+
+
+--
+-- TOC entry 2004 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.id_organization; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.id_organization IS 'ссылка на организацию';
+
+
+--
+-- TOC entry 2005 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.text; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.text IS 'текст сообщения';
+
+
+--
+-- TOC entry 2006 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.id_product; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.id_product IS 'ссылка на название продукта';
+
+
+--
+-- TOC entry 2007 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: COLUMN advert.date_create; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN advert.date_create IS 'дата создания объявления';
+
+
+--
+-- TOC entry 162 (class 1259 OID 17724)
+-- Dependencies: 161 6
+-- Name: advert_id_advert_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE advert_id_advert_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.advert_id_advert_seq OWNER TO postgres;
+
+--
+-- TOC entry 2008 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: advert_id_advert_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE advert_id_advert_seq OWNED BY advert.id_advert;
+
+
+--
+-- TOC entry 2009 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: advert_id_advert_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('advert_id_advert_seq', 8, true);
+
+
+--
+-- TOC entry 163 (class 1259 OID 17726)
+-- Dependencies: 6
+-- Name: stat_advert_story; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE stat_advert_story (
+    id_adv_story integer NOT NULL,
+    id_advert integer NOT NULL,
+    date timestamp with time zone,
+    min_price money,
+    max_price money,
+    min_volume double precision,
+    max_volume double precision,
+    id_volume_type integer,
+    is_delete boolean
+);
+
+
+ALTER TABLE public.stat_advert_story OWNER TO postgres;
+
+--
+-- TOC entry 2010 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.id_adv_story; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.id_adv_story IS 'id истории сообщения';
+
+
+--
+-- TOC entry 2011 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.id_advert; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.id_advert IS 'ссылка на сообщение';
+
+
+--
+-- TOC entry 2012 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.date; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.date IS 'дата записи';
+
+
+--
+-- TOC entry 2013 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.min_price; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.min_price IS 'минимальная цена';
+
+
+--
+-- TOC entry 2014 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.max_price; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.max_price IS 'максимальная цена';
+
+
+--
+-- TOC entry 2015 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.min_volume; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.min_volume IS 'минимальный объем';
+
+
+--
+-- TOC entry 2016 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.max_volume; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.max_volume IS 'максимальный объем';
+
+
+--
+-- TOC entry 2017 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: COLUMN stat_advert_story.id_volume_type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_story.id_volume_type IS 'значение объема';
+
+
+--
+-- TOC entry 164 (class 1259 OID 17729)
+-- Dependencies: 163 6
+-- Name: advert_story_id_adv_story_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE advert_story_id_adv_story_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.advert_story_id_adv_story_seq OWNER TO postgres;
+
+--
+-- TOC entry 2018 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: advert_story_id_adv_story_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE advert_story_id_adv_story_seq OWNED BY stat_advert_story.id_adv_story;
+
+
+--
+-- TOC entry 2019 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: advert_story_id_adv_story_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('advert_story_id_adv_story_seq', 1, false);
+
+
+--
+-- TOC entry 165 (class 1259 OID 17731)
+-- Dependencies: 6
+-- Name: ref_advert_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_advert_type (
+    id_adv_type integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.ref_advert_type OWNER TO postgres;
+
+--
+-- TOC entry 2020 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: COLUMN ref_advert_type.id_adv_type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_advert_type.id_adv_type IS 'id типа сообщения';
+
+
+--
+-- TOC entry 2021 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: COLUMN ref_advert_type.name; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_advert_type.name IS 'название типа';
+
+
+--
+-- TOC entry 166 (class 1259 OID 17737)
+-- Dependencies: 165 6
+-- Name: advert_type_id_adv_type_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE advert_type_id_adv_type_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.advert_type_id_adv_type_seq OWNER TO postgres;
+
+--
+-- TOC entry 2022 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: advert_type_id_adv_type_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE advert_type_id_adv_type_seq OWNED BY ref_advert_type.id_adv_type;
+
+
+--
+-- TOC entry 2023 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: advert_type_id_adv_type_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('advert_type_id_adv_type_seq', 2, true);
+
+
+--
+-- TOC entry 167 (class 1259 OID 17739)
+-- Dependencies: 6
+-- Name: ref_area; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_area (
+    id_area integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.ref_area OWNER TO postgres;
+
+--
+-- TOC entry 2024 (class 0 OID 0)
+-- Dependencies: 167
+-- Name: COLUMN ref_area.id_area; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_area.id_area IS 'Регион';
+
+
+--
+-- TOC entry 2025 (class 0 OID 0)
+-- Dependencies: 167
+-- Name: COLUMN ref_area.name; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_area.name IS 'название региона';
+
+
+--
+-- TOC entry 168 (class 1259 OID 17745)
+-- Dependencies: 167 6
+-- Name: area_id_area_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE area_id_area_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.area_id_area_seq OWNER TO postgres;
+
+--
+-- TOC entry 2026 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: area_id_area_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE area_id_area_seq OWNED BY ref_area.id_area;
+
+
+--
+-- TOC entry 2027 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: area_id_area_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('area_id_area_seq', 1, false);
+
+
+--
+-- TOC entry 169 (class 1259 OID 17747)
+-- Dependencies: 6
+-- Name: customer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE customer (
+    id_customer integer NOT NULL,
+    login character varying,
+    password character varying,
+    id_role integer,
+    email character varying,
+    is_delite boolean,
+    id_person integer
+);
+
+
+ALTER TABLE public.customer OWNER TO postgres;
+
+--
+-- TOC entry 2028 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: TABLE customer; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE customer IS 'пользователь';
+
+
+--
+-- TOC entry 2029 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: COLUMN customer.id_customer; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN customer.id_customer IS 'id пользователя';
+
+
+--
+-- TOC entry 170 (class 1259 OID 17753)
+-- Dependencies: 169 6
+-- Name: customer_id_customer_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE customer_id_customer_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customer_id_customer_seq OWNER TO postgres;
+
+--
+-- TOC entry 2030 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: customer_id_customer_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE customer_id_customer_seq OWNED BY customer.id_customer;
+
+
+--
+-- TOC entry 2031 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: customer_id_customer_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('customer_id_customer_seq', 1, true);
+
+
+--
+-- TOC entry 171 (class 1259 OID 17755)
+-- Dependencies: 6
+-- Name: organization; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE organization (
+    id_organization integer NOT NULL,
+    short_name_org character varying,
+    full_name_org character varying,
+    id_area integer
+);
+
+
+ALTER TABLE public.organization OWNER TO postgres;
+
+--
+-- TOC entry 2032 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: TABLE organization; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE organization IS 'Организация';
+
+
+--
+-- TOC entry 2033 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: COLUMN organization.short_name_org; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN organization.short_name_org IS 'Сокращенное название организации';
+
+
+--
+-- TOC entry 2034 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: COLUMN organization.full_name_org; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN organization.full_name_org IS 'Полное название организации';
+
+
+--
+-- TOC entry 2035 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: COLUMN organization.id_area; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN organization.id_area IS 'ссылка на регион';
+
+
+--
+-- TOC entry 172 (class 1259 OID 17761)
+-- Dependencies: 6 171
+-- Name: organization_id_organization_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE organization_id_organization_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.organization_id_organization_seq OWNER TO postgres;
+
+--
+-- TOC entry 2036 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: organization_id_organization_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE organization_id_organization_seq OWNED BY organization.id_organization;
+
+
+--
+-- TOC entry 2037 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: organization_id_organization_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('organization_id_organization_seq', 1, false);
+
+
+--
+-- TOC entry 173 (class 1259 OID 17763)
+-- Dependencies: 6
+-- Name: person; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE person (
+    id_person integer NOT NULL,
+    name character varying,
+    surname character varying,
+    patrenemic character varying,
+    id_user integer,
+    id_organization integer
+);
+
+
+ALTER TABLE public.person OWNER TO postgres;
+
+--
+-- TOC entry 2038 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: TABLE person; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE person IS 'Профиль пользователя';
+
+
+--
+-- TOC entry 2039 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.id_person; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.id_person IS 'id профиля';
+
+
+--
+-- TOC entry 2040 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.name; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.name IS 'Имя пользователя';
+
+
+--
+-- TOC entry 2041 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.surname; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.surname IS 'Фамилия пользователя';
+
+
+--
+-- TOC entry 2042 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.patrenemic; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.patrenemic IS 'Отчество пользователя';
+
+
+--
+-- TOC entry 2043 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.id_user; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.id_user IS 'ссылка на пользователя';
+
+
+--
+-- TOC entry 2044 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: COLUMN person.id_organization; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN person.id_organization IS 'ссылка на организацию';
+
+
+--
+-- TOC entry 174 (class 1259 OID 17769)
+-- Dependencies: 6 173
+-- Name: person_id_person_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE person_id_person_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.person_id_person_seq OWNER TO postgres;
+
+--
+-- TOC entry 2045 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: person_id_person_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE person_id_person_seq OWNED BY person.id_person;
+
+
+--
+-- TOC entry 2046 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: person_id_person_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('person_id_person_seq', 1, false);
+
+
+--
+-- TOC entry 175 (class 1259 OID 17771)
+-- Dependencies: 6
+-- Name: ref_actual; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_actual (
+    id_actual integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.ref_actual OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 17777)
+-- Dependencies: 175 6
+-- Name: ref_actual_id_actual_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ref_actual_id_actual_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ref_actual_id_actual_seq OWNER TO postgres;
+
+--
+-- TOC entry 2047 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: ref_actual_id_actual_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ref_actual_id_actual_seq OWNED BY ref_actual.id_actual;
+
+
+--
+-- TOC entry 2048 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: ref_actual_id_actual_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ref_actual_id_actual_seq', 1, false);
+
+
+--
+-- TOC entry 177 (class 1259 OID 17779)
+-- Dependencies: 6
+-- Name: ref_product; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_product (
+    id_product integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.ref_product OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 17785)
+-- Dependencies: 6 177
+-- Name: ref_product_id_product_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ref_product_id_product_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ref_product_id_product_seq OWNER TO postgres;
+
+--
+-- TOC entry 2049 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: ref_product_id_product_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ref_product_id_product_seq OWNED BY ref_product.id_product;
+
+
+--
+-- TOC entry 2050 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: ref_product_id_product_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ref_product_id_product_seq', 1, false);
+
+
+--
+-- TOC entry 179 (class 1259 OID 17787)
+-- Dependencies: 6
+-- Name: ref_role; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_role (
+    id_role integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.ref_role OWNER TO postgres;
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 187 (class 1259 OID 24602)
+-- Dependencies: 6
+-- Name: ref_smtp_address; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_smtp_address (
+    domain_name text,
+    smtp_server_name text,
+    id_ref_smtp_address integer NOT NULL
+);
+
+
+ALTER TABLE public.ref_smtp_address OWNER TO postgres;
+
+--
+-- TOC entry 2051 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: TABLE ref_smtp_address; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE ref_smtp_address IS 'Справочник email доменов и smtp серверов';
+
+
+--
+-- TOC entry 188 (class 1259 OID 24609)
+-- Dependencies: 187 6
+-- Name: ref_smtp_address_id_ref_smtp_address_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ref_smtp_address_id_ref_smtp_address_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ref_smtp_address_id_ref_smtp_address_seq OWNER TO postgres;
+
+--
+-- TOC entry 2052 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: ref_smtp_address_id_ref_smtp_address_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ref_smtp_address_id_ref_smtp_address_seq OWNED BY ref_smtp_address.id_ref_smtp_address;
+
+
+--
+-- TOC entry 2053 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: ref_smtp_address_id_ref_smtp_address_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ref_smtp_address_id_ref_smtp_address_seq', 12, true);
+
+
+SET default_with_oids = true;
+
+--
+-- TOC entry 180 (class 1259 OID 17793)
+-- Dependencies: 6
+-- Name: ref_volume_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ref_volume_type (
+    id_volume_type integer NOT NULL,
+    short_name character varying,
+    full_name character varying
+);
+
+
+ALTER TABLE public.ref_volume_type OWNER TO postgres;
+
+--
+-- TOC entry 2054 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: COLUMN ref_volume_type.id_volume_type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_volume_type.id_volume_type IS 'id типа';
+
+
+--
+-- TOC entry 2055 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: COLUMN ref_volume_type.short_name; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_volume_type.short_name IS 'сокращенное название';
+
+
+--
+-- TOC entry 2056 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: COLUMN ref_volume_type.full_name; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN ref_volume_type.full_name IS 'полное название';
+
+
+--
+-- TOC entry 181 (class 1259 OID 17799)
+-- Dependencies: 6 180
+-- Name: ref_volume_type_id_volume_type_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ref_volume_type_id_volume_type_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ref_volume_type_id_volume_type_seq OWNER TO postgres;
+
+--
+-- TOC entry 2057 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ref_volume_type_id_volume_type_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ref_volume_type_id_volume_type_seq OWNED BY ref_volume_type.id_volume_type;
+
+
+--
+-- TOC entry 2058 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ref_volume_type_id_volume_type_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ref_volume_type_id_volume_type_seq', 1, false);
+
+
+--
+-- TOC entry 182 (class 1259 OID 17801)
+-- Dependencies: 6 179
+-- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE role_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.role_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2059 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE role_id_seq OWNED BY ref_role.id_role;
+
+
+--
+-- TOC entry 2060 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('role_id_seq', 3, true);
+
+
+--
+-- TOC entry 183 (class 1259 OID 17803)
+-- Dependencies: 6
+-- Name: stat_advert_actuality; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE stat_advert_actuality (
+    id_adv_actuality integer NOT NULL,
+    id_advert integer,
+    start_date timestamp with time zone,
+    stop_date timestamp with time zone,
+    id_actual integer,
+    is_delete boolean
+);
+
+
+ALTER TABLE public.stat_advert_actuality OWNER TO postgres;
+
+--
+-- TOC entry 2061 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: COLUMN stat_advert_actuality.id_advert; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_actuality.id_advert IS 'ссылка на сообщение';
+
+
+--
+-- TOC entry 2062 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: COLUMN stat_advert_actuality.start_date; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_actuality.start_date IS 'дата начала';
+
+
+--
+-- TOC entry 2063 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: COLUMN stat_advert_actuality.stop_date; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN stat_advert_actuality.stop_date IS 'дата завершения';
+
+
+--
+-- TOC entry 184 (class 1259 OID 17806)
+-- Dependencies: 6 183
+-- Name: stat_advert_actuality_id_adv_actuality_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE stat_advert_actuality_id_adv_actuality_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.stat_advert_actuality_id_adv_actuality_seq OWNER TO postgres;
+
+--
+-- TOC entry 2064 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: stat_advert_actuality_id_adv_actuality_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE stat_advert_actuality_id_adv_actuality_seq OWNED BY stat_advert_actuality.id_adv_actuality;
+
+
+--
+-- TOC entry 2065 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: stat_advert_actuality_id_adv_actuality_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('stat_advert_actuality_id_adv_actuality_seq', 1, false);
+
+
+--
+-- TOC entry 185 (class 1259 OID 17808)
+-- Dependencies: 6
+-- Name: telephone; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE telephone (
+    id_tel integer NOT NULL,
+    id_person integer,
+    tel_number character varying
+);
+
+
+ALTER TABLE public.telephone OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 17814)
+-- Dependencies: 6 185
+-- Name: telephone_id_tel_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE telephone_id_tel_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.telephone_id_tel_seq OWNER TO postgres;
+
+--
+-- TOC entry 2066 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: telephone_id_tel_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE telephone_id_tel_seq OWNED BY telephone.id_tel;
+
+
+--
+-- TOC entry 2067 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: telephone_id_tel_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('telephone_id_tel_seq', 1, false);
+
+
+--
+-- TOC entry 1924 (class 2604 OID 17816)
+-- Dependencies: 162 161
+-- Name: id_advert; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE advert ALTER COLUMN id_advert SET DEFAULT nextval('advert_id_advert_seq'::regclass);
+
+
+--
+-- TOC entry 1928 (class 2604 OID 17817)
+-- Dependencies: 170 169
+-- Name: id_customer; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE customer ALTER COLUMN id_customer SET DEFAULT nextval('customer_id_customer_seq'::regclass);
+
+
+--
+-- TOC entry 1929 (class 2604 OID 17818)
+-- Dependencies: 172 171
+-- Name: id_organization; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE organization ALTER COLUMN id_organization SET DEFAULT nextval('organization_id_organization_seq'::regclass);
+
+
+--
+-- TOC entry 1930 (class 2604 OID 17819)
+-- Dependencies: 174 173
+-- Name: id_person; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE person ALTER COLUMN id_person SET DEFAULT nextval('person_id_person_seq'::regclass);
+
+
+--
+-- TOC entry 1931 (class 2604 OID 17820)
+-- Dependencies: 176 175
+-- Name: id_actual; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_actual ALTER COLUMN id_actual SET DEFAULT nextval('ref_actual_id_actual_seq'::regclass);
+
+
+--
+-- TOC entry 1926 (class 2604 OID 17821)
+-- Dependencies: 166 165
+-- Name: id_adv_type; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_advert_type ALTER COLUMN id_adv_type SET DEFAULT nextval('advert_type_id_adv_type_seq'::regclass);
+
+
+--
+-- TOC entry 1927 (class 2604 OID 17822)
+-- Dependencies: 168 167
+-- Name: id_area; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_area ALTER COLUMN id_area SET DEFAULT nextval('area_id_area_seq'::regclass);
+
+
+--
+-- TOC entry 1932 (class 2604 OID 17823)
+-- Dependencies: 178 177
+-- Name: id_product; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_product ALTER COLUMN id_product SET DEFAULT nextval('ref_product_id_product_seq'::regclass);
+
+
+--
+-- TOC entry 1933 (class 2604 OID 17824)
+-- Dependencies: 182 179
+-- Name: id_role; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_role ALTER COLUMN id_role SET DEFAULT nextval('role_id_seq'::regclass);
+
+
+--
+-- TOC entry 1937 (class 2604 OID 24611)
+-- Dependencies: 188 187
+-- Name: id_ref_smtp_address; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_smtp_address ALTER COLUMN id_ref_smtp_address SET DEFAULT nextval('ref_smtp_address_id_ref_smtp_address_seq'::regclass);
+
+
+--
+-- TOC entry 1934 (class 2604 OID 17825)
+-- Dependencies: 181 180
+-- Name: id_volume_type; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ref_volume_type ALTER COLUMN id_volume_type SET DEFAULT nextval('ref_volume_type_id_volume_type_seq'::regclass);
+
+
+--
+-- TOC entry 1935 (class 2604 OID 17826)
+-- Dependencies: 184 183
+-- Name: id_adv_actuality; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE stat_advert_actuality ALTER COLUMN id_adv_actuality SET DEFAULT nextval('stat_advert_actuality_id_adv_actuality_seq'::regclass);
+
+
+--
+-- TOC entry 1925 (class 2604 OID 17827)
+-- Dependencies: 164 163
+-- Name: id_adv_story; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE stat_advert_story ALTER COLUMN id_adv_story SET DEFAULT nextval('advert_story_id_adv_story_seq'::regclass);
+
+
+--
+-- TOC entry 1936 (class 2604 OID 17828)
+-- Dependencies: 186 185
+-- Name: id_tel; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE telephone ALTER COLUMN id_tel SET DEFAULT nextval('telephone_id_tel_seq'::regclass);
+
+
+--
+-- TOC entry 1981 (class 0 OID 17718)
+-- Dependencies: 161
+-- Data for Name: advert; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY advert (id_advert, id_advert_type, id_user, id_organization, text, id_product, date_create, is_delete, id_area) FROM stdin;
+8	2	\N	\N	Продаем крупный рогатый скот	1	2013-10-26 12:16:38.11+04	\N	\N
+9	1	\N	\N	Организация купит мелкий рогатый скот	1	2013-10-26 12:36:06.765+04	\N	\N
+10	2	\N	\N	Продам рассаду	2	2013-10-26 12:36:06.765+04	\N	\N
+11	1	\N	\N	Куплю рассаду	2	2013-10-26 12:36:06.765+04	\N	\N
+12	2	\N	\N	Продаем зерно: просо, пшеницу, кукурузу	3	2013-10-26 12:36:06.765+04	\N	\N
+13	2	\N	\N	Крупный опт. Мука пшеничная, ржаная	3	2013-10-26 12:36:06.765+04	\N	\N
+14	1	\N	\N	Купим крупную партию кукурузной муки	3	2013-10-26 12:36:06.765+04	\N	\N
+15	2	\N	\N	Картофель средне и позднеспелый продаем	4	2013-10-26 12:36:06.765+04	\N	\N
+16	1	\N	\N	Купим баранину. Крупный опт	4	2013-10-26 12:36:06.765+04	\N	\N
+17	2	\N	\N	Бороны продаем, б/у	5	2013-10-26 12:36:06.765+04	\N	\N
+18	2	\N	\N	Комбайны продаем, б/у	5	2013-10-26 12:36:06.765+04	\N	\N
+19	2	\N	\N	Комбикормовые линии продаем	5	2013-10-26 12:36:06.765+04	\N	\N
+4	2	\N	\N	Весь набор Овощей! Просчитываем логистику. Отпускаем с места. Цены меняются ежедневно!!! Все фотографии высылаем на адрес после личного общения	4	2013-06-17 00:00:00+04	\N	\N
+2	2	\N	\N	Приглашаем к сотрудничеству оптовые и мелкооптовые организации, а также цеха по переработке лука репчатого, некондиционного (лук оставшийся после переборки). Голландские сорта, калибр 40-90. Местонахождение продукции Волгоградская область. Сопровождение всеми необходимыми документами. Возможен как наличный так и безналичный (с НДС) расчёт.	7	2013-04-24 00:00:00+04	\N	\N
+3	2	\N	\N	ИП Глава КФХ Хан Игорь Эрикович занимается выращиванием овощных и бахчевых культур на территории Волгоградской области.	4	2013-04-20 00:00:00+04	\N	\N
+5	2	\N	\N	Капуста из Беларусии, сорт МАРА 85 ГоСТ.	4	2013-02-21 00:00:00+04	\N	\N
+6	2	\N	\N	продам лук, морковь, морковь мытая, пекинская, белокачанная, краснокачанная капуста, сельдерей! товар от производителя! цена договорная	4	2013-02-01 00:00:00+04	\N	\N
+7	2	\N	\N	продаем картофель сорта РедСкарлет, Розаро, Невский Цена договорная.\t	4	2012-10-04 00:00:00+04	\N	\N
+\.
+
+
+--
+-- TOC entry 1985 (class 0 OID 17747)
+-- Dependencies: 169
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY customer (id_customer, login, password, id_role, email, is_delite, id_person) FROM stdin;
+1	test	\N	\N	\N	\N	\N
+0	test	\N	\N	\N	\N	\N
+3	test	\N	\N	\N	\N	\N
+4	test	\N	\N	\N	\N	\N
+2	test_new	\N	\N	\N	\N	\N
+5	fermer	testHashPassword	\N	ya@ya.ru	\N	\N
+6	olga_rudenko	1000:a8ca81d66bf7263a014e43886f7c4cb7a5f972326c68a035:b08e4434579ad25df07a87b3671365731dba88e0f5115efd	\N	rudenko7@inbox.ru	\N	\N
+\.
+
+
+--
+-- TOC entry 1986 (class 0 OID 17755)
+-- Dependencies: 171
+-- Data for Name: organization; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY organization (id_organization, short_name_org, full_name_org, id_area) FROM stdin;
+0	\N	test full name	\N
+1	\N	test org	\N
+\.
+
+
+--
+-- TOC entry 1987 (class 0 OID 17763)
+-- Dependencies: 173
+-- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY person (id_person, name, surname, patrenemic, id_user, id_organization) FROM stdin;
+0	lsdflm	df;lm	\N	0	\N
+1	Иван	Иванов	\N	5	\N
+2	Ольга	Руденко	\N	6	\N
+\.
+
+
+--
+-- TOC entry 1988 (class 0 OID 17771)
+-- Dependencies: 175
+-- Data for Name: ref_actual; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_actual (id_actual, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1983 (class 0 OID 17731)
+-- Dependencies: 165
+-- Data for Name: ref_advert_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_advert_type (id_adv_type, name) FROM stdin;
+1	Покупка
+2	Продажа
+\.
+
+
+--
+-- TOC entry 1984 (class 0 OID 17739)
+-- Dependencies: 167
+-- Data for Name: ref_area; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_area (id_area, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1989 (class 0 OID 17779)
+-- Dependencies: 177
+-- Data for Name: ref_product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_product (id_product, name) FROM stdin;
+1	Животноводство
+2	Растениеводство
+3	Продукция из зерна
+5	Сельскохозяйственная техника
+6	Удобрения
+7	Корма и добавки
+8	Посадочный материал
+9	ГСМ
+11	Спецодежда и спец инвентарь
+12	Средства защиты растений
+13	Тара и упаковка
+10	Оборудование для переработки, упаковки и хранения
+4	Продовольствие
+\.
+
+
+--
+-- TOC entry 1990 (class 0 OID 17787)
+-- Dependencies: 179
+-- Data for Name: ref_role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_role (id_role, name) FROM stdin;
+1	Администратор
+2	Пользователь
+3	Гость
+\.
+
+
+--
+-- TOC entry 1994 (class 0 OID 24602)
+-- Dependencies: 187
+-- Data for Name: ref_smtp_address; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_smtp_address (domain_name, smtp_server_name, id_ref_smtp_address) FROM stdin;
+mail.ru	smtp.mail.ru	1
+list.ru	smtp.mail.ru	2
+inbox.ru	smtp.mail.ru	3
+bk.ru	smtp.mail.ru	4
+rambler.ru	smtp.rambler.ru	5
+lenta.ru	smtp.rambler.ru	6
+autorambler.ru	smtp.rambler.ru	7
+myrabler.ru	smpt.rambler.ru	8
+ro.ru	smtp.rambler.ru	9
+rO.ru	smtp.rambler.ru	10
+yandex.ru	smtp.yandex.ru	11
+gmail.com	smtp.gmail.com	12
+\.
+
+
+--
+-- TOC entry 1991 (class 0 OID 17793)
+-- Dependencies: 180
+-- Data for Name: ref_volume_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ref_volume_type (id_volume_type, short_name, full_name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1992 (class 0 OID 17803)
+-- Dependencies: 183
+-- Data for Name: stat_advert_actuality; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY stat_advert_actuality (id_adv_actuality, id_advert, start_date, stop_date, id_actual, is_delete) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1982 (class 0 OID 17726)
+-- Dependencies: 163
+-- Data for Name: stat_advert_story; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY stat_advert_story (id_adv_story, id_advert, date, min_price, max_price, min_volume, max_volume, id_volume_type, is_delete) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1993 (class 0 OID 17808)
+-- Dependencies: 185
+-- Data for Name: telephone; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY telephone (id_tel, id_person, tel_number) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1939 (class 2606 OID 17849)
+-- Dependencies: 161 161
+-- Name: advert_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_pkey PRIMARY KEY (id_advert);
+
+
+--
+-- TOC entry 1941 (class 2606 OID 17851)
+-- Dependencies: 163 163
+-- Name: advert_story_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY stat_advert_story
+    ADD CONSTRAINT advert_story_pkey PRIMARY KEY (id_adv_story);
+
+
+--
+-- TOC entry 1943 (class 2606 OID 17853)
+-- Dependencies: 165 165
+-- Name: advert_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_advert_type
+    ADD CONSTRAINT advert_type_pkey PRIMARY KEY (id_adv_type);
+
+
+--
+-- TOC entry 1945 (class 2606 OID 17855)
+-- Dependencies: 167 167
+-- Name: area_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_area
+    ADD CONSTRAINT area_pkey PRIMARY KEY (id_area);
+
+
+--
+-- TOC entry 1947 (class 2606 OID 17857)
+-- Dependencies: 169 169
+-- Name: customer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT customer_pkey PRIMARY KEY (id_customer);
+
+
+--
+-- TOC entry 1949 (class 2606 OID 17859)
+-- Dependencies: 171 171
+-- Name: organization_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY organization
+    ADD CONSTRAINT organization_pkey PRIMARY KEY (id_organization);
+
+
+--
+-- TOC entry 1951 (class 2606 OID 17861)
+-- Dependencies: 173 173
+-- Name: person_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_pkey1 PRIMARY KEY (id_person);
+
+
+--
+-- TOC entry 1953 (class 2606 OID 17863)
+-- Dependencies: 175 175
+-- Name: ref_actual_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_actual
+    ADD CONSTRAINT ref_actual_pkey PRIMARY KEY (id_actual);
+
+
+--
+-- TOC entry 1955 (class 2606 OID 17865)
+-- Dependencies: 177 177
+-- Name: ref_product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_product
+    ADD CONSTRAINT ref_product_pkey PRIMARY KEY (id_product);
+
+
+--
+-- TOC entry 1965 (class 2606 OID 24613)
+-- Dependencies: 187 187
+-- Name: ref_smtp_address_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_smtp_address
+    ADD CONSTRAINT ref_smtp_address_pkey PRIMARY KEY (id_ref_smtp_address);
+
+
+--
+-- TOC entry 1959 (class 2606 OID 17867)
+-- Dependencies: 180 180
+-- Name: ref_volume_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_volume_type
+    ADD CONSTRAINT ref_volume_type_pkey PRIMARY KEY (id_volume_type);
+
+
+--
+-- TOC entry 1957 (class 2606 OID 17869)
+-- Dependencies: 179 179
+-- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ref_role
+    ADD CONSTRAINT role_pkey PRIMARY KEY (id_role);
+
+
+--
+-- TOC entry 1961 (class 2606 OID 17871)
+-- Dependencies: 183 183
+-- Name: stat_advert_actuality_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY stat_advert_actuality
+    ADD CONSTRAINT stat_advert_actuality_pkey PRIMARY KEY (id_adv_actuality);
+
+
+--
+-- TOC entry 1963 (class 2606 OID 17873)
+-- Dependencies: 185 185
+-- Name: telephone_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY telephone
+    ADD CONSTRAINT telephone_pkey PRIMARY KEY (id_tel);
+
+
+--
+-- TOC entry 1966 (class 2606 OID 17874)
+-- Dependencies: 165 161 1942
+-- Name: advert_id_advert_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_id_advert_type_fkey FOREIGN KEY (id_advert_type) REFERENCES ref_advert_type(id_adv_type);
+
+
+--
+-- TOC entry 1967 (class 2606 OID 17879)
+-- Dependencies: 167 161 1944
+-- Name: advert_id_area_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_id_area_fkey FOREIGN KEY (id_area) REFERENCES ref_area(id_area);
+
+
+--
+-- TOC entry 1968 (class 2606 OID 17884)
+-- Dependencies: 161 1948 171
+-- Name: advert_id_organization_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_id_organization_fkey FOREIGN KEY (id_organization) REFERENCES organization(id_organization);
+
+
+--
+-- TOC entry 1969 (class 2606 OID 17889)
+-- Dependencies: 1954 161 177
+-- Name: advert_id_product_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_id_product_fkey FOREIGN KEY (id_product) REFERENCES ref_product(id_product);
+
+
+--
+-- TOC entry 1970 (class 2606 OID 17894)
+-- Dependencies: 169 1946 161
+-- Name: advert_id_user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY advert
+    ADD CONSTRAINT advert_id_user_fkey FOREIGN KEY (id_user) REFERENCES customer(id_customer);
+
+
+--
+-- TOC entry 1973 (class 2606 OID 17899)
+-- Dependencies: 1950 169 173
+-- Name: customer_id_person_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT customer_id_person_fkey FOREIGN KEY (id_person) REFERENCES person(id_person);
+
+
+--
+-- TOC entry 1974 (class 2606 OID 17904)
+-- Dependencies: 179 169 1956
+-- Name: customer_id_role_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT customer_id_role_fkey FOREIGN KEY (id_role) REFERENCES ref_role(id_role);
+
+
+--
+-- TOC entry 1975 (class 2606 OID 17909)
+-- Dependencies: 167 1944 171
+-- Name: organization_id_area_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY organization
+    ADD CONSTRAINT organization_id_area_fkey FOREIGN KEY (id_area) REFERENCES ref_area(id_area);
+
+
+--
+-- TOC entry 1976 (class 2606 OID 17914)
+-- Dependencies: 1948 171 173
+-- Name: person_id_organization_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_id_organization_fkey FOREIGN KEY (id_organization) REFERENCES organization(id_organization);
+
+
+--
+-- TOC entry 1977 (class 2606 OID 17919)
+-- Dependencies: 1946 169 173
+-- Name: person_id_user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_id_user_fkey FOREIGN KEY (id_user) REFERENCES customer(id_customer);
+
+
+--
+-- TOC entry 1978 (class 2606 OID 17924)
+-- Dependencies: 183 1952 175
+-- Name: stat_advert_actuality_id_actual_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stat_advert_actuality
+    ADD CONSTRAINT stat_advert_actuality_id_actual_fkey FOREIGN KEY (id_actual) REFERENCES ref_actual(id_actual);
+
+
+--
+-- TOC entry 1979 (class 2606 OID 17929)
+-- Dependencies: 183 1938 161
+-- Name: stat_advert_actuality_id_advert_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stat_advert_actuality
+    ADD CONSTRAINT stat_advert_actuality_id_advert_fkey FOREIGN KEY (id_advert) REFERENCES advert(id_advert);
+
+
+--
+-- TOC entry 1971 (class 2606 OID 17934)
+-- Dependencies: 163 161 1938
+-- Name: stat_advert_story_id_advert_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stat_advert_story
+    ADD CONSTRAINT stat_advert_story_id_advert_fkey FOREIGN KEY (id_advert) REFERENCES advert(id_advert);
+
+
+--
+-- TOC entry 1972 (class 2606 OID 17939)
+-- Dependencies: 163 1958 180
+-- Name: stat_advert_story_id_volume_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stat_advert_story
+    ADD CONSTRAINT stat_advert_story_id_volume_type_fkey FOREIGN KEY (id_volume_type) REFERENCES ref_volume_type(id_volume_type);
+
+
+--
+-- TOC entry 1980 (class 2606 OID 17944)
+-- Dependencies: 173 185 1950
+-- Name: telephone_id_person_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY telephone
+    ADD CONSTRAINT telephone_id_person_fkey FOREIGN KEY (id_person) REFERENCES person(id_person);
+
+
+--
+-- TOC entry 1999 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-11-10 17:26:30
+
+--
+-- PostgreSQL database dump complete
+--
+

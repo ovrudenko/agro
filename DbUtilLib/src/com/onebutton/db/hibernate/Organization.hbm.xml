@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.onebutton.db.hibernate.Organization" schema="public" table="organization">
+    <comment>Îðãàíèçàöèÿ</comment>
+    <id name="idOrganization" type="int">
+      <column name="id_organization"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.onebutton.db.hibernate.RefArea" fetch="select" name="refArea">
+      <column name="id_area">
+        <comment>ññûëêà íà ðåãèîí</comment>
+      </column>
+    </many-to-one>
+    <property name="shortNameOrg" type="string">
+      <column name="short_name_org">
+        <comment>Ñîêðàùåííîå íàçâàíèå
+                îðãàíèçàöèè</comment>
+      </column>
+    </property>
+    <property name="fullNameOrg" type="string">
+      <column name="full_name_org">
+        <comment>Ïîëíîå íàçâàíèå
+                îðãàíèçàöèè</comment>
+      </column>
+    </property>
+    <set inverse="true" name="persons">
+      <key>
+        <column name="id_organization">
+          <comment>ññûëêà íà îðãàíèçàöèþ</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.Person"/>
+    </set>
+    <set inverse="true" name="adverts">
+      <key>
+        <column name="id_organization">
+          <comment>ññûëêà íà îðãàíèçàöèþ</comment>
+        </column>
+      </key>
+      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
+    </set>
+  </class>
+</hibernate-mapping>
