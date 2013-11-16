@@ -19,7 +19,7 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class PasswordHash {
 
-    /**test*/
+    
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     // The following constants may be changed without breaking existing hashes.
