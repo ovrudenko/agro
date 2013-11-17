@@ -16,6 +16,7 @@ import com.onebutton.mail.letter.Letter;
 import com.onebutton.mail.letter.ProfileActivationLetter;
 import com.onebutton.mail.send.MailSender;
 import com.onebutton.mail.send.MailSenderImpl;
+import com.onebutton.service.AuthUserService;
 import com.onebutton.user.data.User;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
@@ -122,7 +123,8 @@ public class RegistrationUserBean implements Serializable {
                 person.setCustomer(customer);
                 PersonQueries personQuery = new PersonQueries();
                 personQuery.insert(person);
-               
+                AuthUserService us = new AuthUserService(login, password, name, surname, eMail);
+                us.sendConfirmLetter();
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidKeySpecException ex) {
