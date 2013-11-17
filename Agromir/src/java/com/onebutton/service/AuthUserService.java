@@ -27,29 +27,19 @@ public class AuthUserService {
 
     private User newUser;
     private static final String BASE_URL = "http://localhost:8080/Agromir";
+    private static final String AGRO_MAIL = "agromir_robot@mail.ru";
 
     public AuthUserService(String login, String password, String name, String surname, String eMail) {
         newUser = new User(login, password, name, surname, eMail);
     }
     
     public void sendConfirmLetter() throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String smtpDomain = getSmtpDomain();
         Letter letter = new ProfileActivationLetter();
-        SystemMailParameter param = new SystemMailParameter("agromir_robot@lenta.ru", newUser.geteMail(), smtpDomain);
+        SystemMailParameter param = new SystemMailParameter(AGRO_MAIL, newUser.geteMail(), "smtp.mail.ru");
         String url = getGeneratedAuthUrl();
-        String[] params = new String[]{newUser.getName() + " " + newUser.getSurname(), newUser.getLogin(), url };
+        String[] params = new String[]{newUser.getName() + " " + newUser.getSurname(), newUser.getLogin(), newUser.getPassword(), url };
         Message message = letter.constructLetter(params);
-        MailSender sender = new MailSenderImpl(message, param);
-    }
-    
-    private String getSmtpDomain(){
-        RefSmtpAddressDAO dao = new RefSmtpAddressQueries();
-        List<RefSmtpAddress> smtpAddress = dao.getSmtpServerNameByDomainName(getSmtpDomain(newUser));
-        return smtpAddress.get(0).getSmtpServerName();
-    }
-
-    private String getSmtpDomain(User user) {
-        return user.getDomainName();
+        new MailSenderImpl(message, param);
     }
     
     private String getGeneratedAuthUrl() throws NoSuchAlgorithmException, InvalidKeySpecException{

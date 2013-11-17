@@ -17,7 +17,7 @@ import com.onebutton.user.data.User;
 public class Main {
 
     public static void main(String[] args) {
-        User user = new User("marina", "password", "Марина Михайловна", "Рыбина", "tote.sadom@gmail.com");
+        User user = new User("marina", "password", "Марина Михайловна", "Рыбина", "rudenko7@inbox.ru");
         Letter letter = new ProfileActivationLetter();
         SystemMailParameter param = new SystemMailParameter("agromir_robot@mail.ru", user.geteMail(), "smtp.mail.ru");
         String[] params = new String[]{user.getName(), user.getLogin(), user.getPassword(), ""};

@@ -35,9 +35,9 @@ public class ProfileActivationLetter extends Letter {
     }
 
     @Override
-    public String constructBody(String ... args) {
+    public String constructBody(String[] args) {
         return "Уважаемый(ая), " + args[0] + "!\n"
-                + "Поздравляем Вас с успешной регистрацией на электронной торговой площадке Арго!\n "
+                + "Поздравляем Вас с успешной регистрацией на электронной торговой площадке Агромир!\n "
                 + "Ваш логин: " + args[1] + "\n"
                 + "Ваш пароль: " + args[2] + "\n"
                 + "Для активации Вашего профиля нажмите ссылку: \n"

@@ -109,7 +109,7 @@ public final class MailSenderImpl extends MailSender {
 
         public Authenticator() {
 
-            String username = "argo_robot";
+            String username = "agromir_robot@mail.ru";
 
             String password = "Hot_leto200&";
 
