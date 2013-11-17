@@ -1,49 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.StatAdvertStory" schema="public" table="stat_advert_story">
-    <id name="idAdvStory" type="int">
-      <column name="id_adv_story"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.onebutton.db.hibernate.Advert" fetch="select" name="advert">
-      <column name="id_advert" not-null="true">
-        <comment>ññûëêà íà ñîîáùåíèå</comment>
-      </column>
-    </many-to-one>
-    <many-to-one class="com.onebutton.db.hibernate.RefVolumeType" fetch="select" name="refVolumeType">
-      <column name="id_volume_type">
-        <comment>çíà÷åíèå îáúåìà</comment>
-      </column>
-    </many-to-one>
-    <property name="date" type="timestamp">
-      <column length="35" name="date">
-        <comment>äàòà çàïèñè</comment>
-      </column>
-    </property>
-    <property name="minPrice" type="java.lang.Double">
-      <column name="min_price" scale="0">
-        <comment>ìèíèìàëüíàÿ öåíà</comment>
-      </column>
-    </property>
-    <property name="maxPrice" type="java.lang.Double">
-      <column name="max_price" scale="0">
-        <comment>ìàêñèìàëüíàÿ öåíà</comment>
-      </column>
-    </property>
-    <property name="minVolume" type="java.lang.Double">
-      <column name="min_volume" precision="17" scale="17">
-        <comment>ìèíèìàëüíûé îáúåì</comment>
-      </column>
-    </property>
-    <property name="maxVolume" type="java.lang.Double">
-      <column name="max_volume" precision="17" scale="17">
-        <comment>ìàêñèìàëüíûé îáúåì</comment>
-      </column>
-    </property>
-    <property name="isDelete" type="java.lang.Boolean">
-      <column name="is_delete"/>
-    </property>
-  </class>
+    <class name="com.onebutton.db.hibernate.StatAdvertStory" table="stat_advert_story" schema="public">
+        <id name="idAdvStory" type="int">
+            <column name="id_adv_story" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="advert" class="com.onebutton.db.hibernate.Advert" fetch="select">
+            <column name="id_advert" not-null="true">
+                <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#241;&#238;&#238;&#225;&#249;&#229;&#237;&#232;&#229;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="refVolumeType" class="com.onebutton.db.hibernate.RefVolumeType" fetch="select">
+            <column name="id_volume_type">
+                <comment>&#231;&#237;&#224;&#247;&#229;&#237;&#232;&#229; &#238;&#225;&#250;&#229;&#236;&#224;</comment>
+            </column>
+        </many-to-one>
+        <property name="date" type="timestamp">
+            <column name="date" length="35">
+                <comment>&#228;&#224;&#242;&#224; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <property name="minPrice" type="java.lang.Double">
+            <column name="min_price" scale="0">
+                <comment>&#236;&#232;&#237;&#232;&#236;&#224;&#235;&#252;&#237;&#224;&#255; &#246;&#229;&#237;&#224;</comment>
+            </column>
+        </property>
+        <property name="maxPrice" type="java.lang.Double">
+            <column name="max_price" scale="0">
+                <comment>&#236;&#224;&#234;&#241;&#232;&#236;&#224;&#235;&#252;&#237;&#224;&#255; &#246;&#229;&#237;&#224;</comment>
+            </column>
+        </property>
+        <property name="minVolume" type="java.lang.Double">
+            <column name="min_volume" precision="17" scale="17">
+                <comment>&#236;&#232;&#237;&#232;&#236;&#224;&#235;&#252;&#237;&#251;&#233; &#238;&#225;&#250;&#229;&#236;</comment>
+            </column>
+        </property>
+        <property name="maxVolume" type="java.lang.Double">
+            <column name="max_volume" precision="17" scale="17">
+                <comment>&#236;&#224;&#234;&#241;&#232;&#236;&#224;&#235;&#252;&#237;&#251;&#233; &#238;&#225;&#250;&#229;&#236;</comment>
+            </column>
+        </property>
+        <property name="isDelete" type="java.lang.Boolean">
+            <column name="is_delete" />
+        </property>
+    </class>
 </hibernate-mapping>

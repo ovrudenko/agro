@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class Advert  implements java.io.Serializable {
 
-    private int count;
+
      private int idAdvert;
      private Organization organization;
      private RefProduct refProduct;
@@ -21,8 +21,8 @@ public class Advert  implements java.io.Serializable {
      private String text;
      private Date dateCreate;
      private Boolean isDelete;
-     private Set statAdvertStories = new HashSet(0);
-     private Set statAdvertActualities = new HashSet(0);
+     private Set<StatAdvertStory> statAdvertStories = new HashSet<StatAdvertStory>(0);
+     private Set<StatAdvertActuality> statAdvertActualities = new HashSet<StatAdvertActuality>(0);
 
     public Advert() {
     }
@@ -31,7 +31,7 @@ public class Advert  implements java.io.Serializable {
     public Advert(int idAdvert) {
         this.idAdvert = idAdvert;
     }
-    public Advert(int idAdvert, Organization organization, RefProduct refProduct, RefArea refArea, RefAdvertType refAdvertType, Customer customer, String text, Date dateCreate, Boolean isDelete, Set statAdvertStories, Set statAdvertActualities) {
+    public Advert(int idAdvert, Organization organization, RefProduct refProduct, RefArea refArea, RefAdvertType refAdvertType, Customer customer, String text, Date dateCreate, Boolean isDelete, Set<StatAdvertStory> statAdvertStories, Set<StatAdvertActuality> statAdvertActualities) {
        this.idAdvert = idAdvert;
        this.organization = organization;
        this.refProduct = refProduct;
@@ -108,27 +108,19 @@ public class Advert  implements java.io.Serializable {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
-    public Set getStatAdvertStories() {
+    public Set<StatAdvertStory> getStatAdvertStories() {
         return this.statAdvertStories;
     }
     
-    public void setStatAdvertStories(Set statAdvertStories) {
+    public void setStatAdvertStories(Set<StatAdvertStory> statAdvertStories) {
         this.statAdvertStories = statAdvertStories;
     }
-    public Set getStatAdvertActualities() {
+    public Set<StatAdvertActuality> getStatAdvertActualities() {
         return this.statAdvertActualities;
     }
     
-    public void setStatAdvertActualities(Set statAdvertActualities) {
+    public void setStatAdvertActualities(Set<StatAdvertActuality> statAdvertActualities) {
         this.statAdvertActualities = statAdvertActualities;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
 

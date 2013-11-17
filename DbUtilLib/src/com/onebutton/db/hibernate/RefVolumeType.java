@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class RefVolumeType  implements java.io.Serializable {
      private int idVolumeType;
      private String shortName;
      private String fullName;
-     private Set statAdvertStories = new HashSet(0);
+     private Set<StatAdvertStory> statAdvertStories = new HashSet<StatAdvertStory>(0);
 
     public RefVolumeType() {
     }
@@ -23,7 +23,7 @@ public class RefVolumeType  implements java.io.Serializable {
     public RefVolumeType(int idVolumeType) {
         this.idVolumeType = idVolumeType;
     }
-    public RefVolumeType(int idVolumeType, String shortName, String fullName, Set statAdvertStories) {
+    public RefVolumeType(int idVolumeType, String shortName, String fullName, Set<StatAdvertStory> statAdvertStories) {
        this.idVolumeType = idVolumeType;
        this.shortName = shortName;
        this.fullName = fullName;
@@ -51,11 +51,11 @@ public class RefVolumeType  implements java.io.Serializable {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public Set getStatAdvertStories() {
+    public Set<StatAdvertStory> getStatAdvertStories() {
         return this.statAdvertStories;
     }
     
-    public void setStatAdvertStories(Set statAdvertStories) {
+    public void setStatAdvertStories(Set<StatAdvertStory> statAdvertStories) {
         this.statAdvertStories = statAdvertStories;
     }
 

@@ -10,6 +10,13 @@ import com.onebutton.db.hibernate.Customer;
 import com.onebutton.db.hibernate.Person;
 import com.onebutton.db.queries.CustomerCRUD;
 import com.onebutton.db.queries.PersonQueries;
+import com.onebutton.mail.data.Message;
+import com.onebutton.mail.data.SystemMailParameter;
+import com.onebutton.mail.letter.Letter;
+import com.onebutton.mail.letter.ProfileActivationLetter;
+import com.onebutton.mail.send.MailSender;
+import com.onebutton.mail.send.MailSenderImpl;
+import com.onebutton.user.data.User;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -27,7 +34,6 @@ import javax.faces.bean.SessionScoped;
 public class RegistrationUserBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private String login;
     private String password;
     private String name;
@@ -51,8 +57,6 @@ public class RegistrationUserBean implements Serializable {
     public void setOpenRegistrForm(boolean openRegistrForm) {
         this.openRegistrForm = openRegistrForm;
     }
-
-
 
     public String getLogin() {
         return login;
@@ -118,7 +122,8 @@ public class RegistrationUserBean implements Serializable {
                 person.setCustomer(customer);
                 PersonQueries personQuery = new PersonQueries();
                 personQuery.insert(person);
-
+                User newUser = initUser();
+                String domain = getSmtpDomain(newUser);
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidKeySpecException ex) {
@@ -131,4 +136,19 @@ public class RegistrationUserBean implements Serializable {
 
     }
 
+    private User initUser() {
+        User user = new User(login, password, name, surname, eMail);
+        return user;
+    }
+
+    private String getSmtpDomain(User user) {
+        return user.getDomainName();
+    }
+
+    private void sendSmpConfirmToNewUserMail(User user, String userMailDomain) {
+        Letter letter = new ProfileActivationLetter(user);
+        SystemMailParameter param = new SystemMailParameter("agromir_robot@lenta.ru", user.geteMail(), userMailDomain);
+        Message message = letter.constructLetter();
+        MailSender sender = new MailSenderImpl(message, param);
+    }
 }

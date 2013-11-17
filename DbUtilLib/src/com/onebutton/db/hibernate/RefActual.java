@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class RefActual  implements java.io.Serializable {
 
      private int idActual;
      private String name;
-     private Set statAdvertActualities = new HashSet(0);
+     private Set<StatAdvertActuality> statAdvertActualities = new HashSet<StatAdvertActuality>(0);
 
     public RefActual() {
     }
@@ -22,7 +22,7 @@ public class RefActual  implements java.io.Serializable {
     public RefActual(int idActual) {
         this.idActual = idActual;
     }
-    public RefActual(int idActual, String name, Set statAdvertActualities) {
+    public RefActual(int idActual, String name, Set<StatAdvertActuality> statAdvertActualities) {
        this.idActual = idActual;
        this.name = name;
        this.statAdvertActualities = statAdvertActualities;
@@ -42,11 +42,11 @@ public class RefActual  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getStatAdvertActualities() {
+    public Set<StatAdvertActuality> getStatAdvertActualities() {
         return this.statAdvertActualities;
     }
     
-    public void setStatAdvertActualities(Set statAdvertActualities) {
+    public void setStatAdvertActualities(Set<StatAdvertActuality> statAdvertActualities) {
         this.statAdvertActualities = statAdvertActualities;
     }
 

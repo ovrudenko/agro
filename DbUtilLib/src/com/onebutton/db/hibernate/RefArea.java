@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,8 +13,8 @@ public class RefArea  implements java.io.Serializable {
 
      private int idArea;
      private String name;
-     private Set adverts = new HashSet(0);
-     private Set organizations = new HashSet(0);
+     private Set<Advert> adverts = new HashSet<Advert>(0);
+     private Set<Organization> organizations = new HashSet<Organization>(0);
 
     public RefArea() {
     }
@@ -23,7 +23,7 @@ public class RefArea  implements java.io.Serializable {
     public RefArea(int idArea) {
         this.idArea = idArea;
     }
-    public RefArea(int idArea, String name, Set adverts, Set organizations) {
+    public RefArea(int idArea, String name, Set<Advert> adverts, Set<Organization> organizations) {
        this.idArea = idArea;
        this.name = name;
        this.adverts = adverts;
@@ -44,18 +44,18 @@ public class RefArea  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getAdverts() {
+    public Set<Advert> getAdverts() {
         return this.adverts;
     }
     
-    public void setAdverts(Set adverts) {
+    public void setAdverts(Set<Advert> adverts) {
         this.adverts = adverts;
     }
-    public Set getOrganizations() {
+    public Set<Organization> getOrganizations() {
         return this.organizations;
     }
     
-    public void setOrganizations(Set organizations) {
+    public void setOrganizations(Set<Organization> organizations) {
         this.organizations = organizations;
     }
 

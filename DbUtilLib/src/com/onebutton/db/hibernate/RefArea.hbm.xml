@@ -1,30 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.RefArea" schema="public" table="ref_area">
-    <id name="idArea" type="int">
-      <column name="id_area"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="name" type="string">
-      <column name="name">
-        <comment>íàçâàíèå ðåãèîíà</comment>
-      </column>
-    </property>
-    <set inverse="true" name="adverts">
-      <key>
-        <column name="id_area"/>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
-    </set>
-    <set inverse="true" name="organizations">
-      <key>
-        <column name="id_area">
-          <comment>ññûëêà íà ðåãèîí</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Organization"/>
-    </set>
-  </class>
+    <class name="com.onebutton.db.hibernate.RefArea" table="ref_area" schema="public">
+        <id name="idArea" type="int">
+            <column name="id_area" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>&#237;&#224;&#231;&#226;&#224;&#237;&#232;&#229; &#240;&#229;&#227;&#232;&#238;&#237;&#224;</comment>
+            </column>
+        </property>
+        <set name="adverts" inverse="true">
+            <key>
+                <column name="id_area" />
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Advert" />
+        </set>
+        <set name="organizations" inverse="true">
+            <key>
+                <column name="id_area">
+                    <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#240;&#229;&#227;&#232;&#238;&#237;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Organization" />
+        </set>
+    </class>
 </hibernate-mapping>

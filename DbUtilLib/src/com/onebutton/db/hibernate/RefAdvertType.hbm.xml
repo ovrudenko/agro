@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.RefAdvertType" schema="public" table="ref_advert_type">
-    <id name="idAdvType" type="int">
-      <column name="id_adv_type"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="name" type="string">
-      <column name="name">
-        <comment>íàçâàíèå òèïà</comment>
-      </column>
-    </property>
-    <set inverse="true" name="adverts">
-      <key>
-        <column name="id_advert_type">
-          <comment>òèï ñîîáùåíèÿ</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
-    </set>
-  </class>
+    <class name="com.onebutton.db.hibernate.RefAdvertType" table="ref_advert_type" schema="public">
+        <id name="idAdvType" type="int">
+            <column name="id_adv_type" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>&#237;&#224;&#231;&#226;&#224;&#237;&#232;&#229; &#242;&#232;&#239;&#224;</comment>
+            </column>
+        </property>
+        <set name="adverts" inverse="true">
+            <key>
+                <column name="id_advert_type">
+                    <comment>&#242;&#232;&#239; &#241;&#238;&#238;&#225;&#249;&#229;&#237;&#232;&#255;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Advert" />
+        </set>
+    </class>
 </hibernate-mapping>

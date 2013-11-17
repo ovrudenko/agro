@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -10,10 +10,11 @@ import java.util.Set;
  */
 public class RefAdvertType  implements java.io.Serializable {
 
-    private int count;
+
      private int idAdvType;
      private String name;
-     private Set adverts = new HashSet(0);
+     private Set<Advert> adverts = new HashSet<Advert>(0);
+     private int count;
 
     public RefAdvertType() {
     }
@@ -22,7 +23,7 @@ public class RefAdvertType  implements java.io.Serializable {
     public RefAdvertType(int idAdvType) {
         this.idAdvType = idAdvType;
     }
-    public RefAdvertType(int idAdvType, String name, Set adverts) {
+    public RefAdvertType(int idAdvType, String name, Set<Advert> adverts) {
        this.idAdvType = idAdvType;
        this.name = name;
        this.adverts = adverts;
@@ -42,11 +43,11 @@ public class RefAdvertType  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getAdverts() {
+    public Set<Advert> getAdverts() {
         return this.adverts;
     }
     
-    public void setAdverts(Set adverts) {
+    public void setAdverts(Set<Advert> adverts) {
         this.adverts = adverts;
     }
 
@@ -57,6 +58,7 @@ public class RefAdvertType  implements java.io.Serializable {
     public void setCount(int count) {
         this.count = count;
     }
+
 
 }
 

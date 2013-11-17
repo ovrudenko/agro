@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.onebutton.db.hibernate.RefSmtpAddress" table="ref_smtp_address" schema="public">
+        <comment>&#209;&#239;&#240;&#224;&#226;&#238;&#247;&#237;&#232;&#234; email &#228;&#238;&#236;&#229;&#237;&#238;&#226; &#232; smtp
+        &#241;&#229;&#240;&#226;&#229;&#240;&#238;&#226;</comment>
+        <id name="idRefSmtpAddress" type="int">
+            <column name="id_ref_smtp_address" />
+            <generator class="assigned" />
+        </id>
+        <property name="domainName" type="string">
+            <column name="domain_name" />
+        </property>
+        <property name="smtpServerName" type="string">
+            <column name="smtp_server_name" />
+        </property>
+    </class>
+</hibernate-mapping>

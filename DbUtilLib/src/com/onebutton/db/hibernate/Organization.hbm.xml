@@ -1,45 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.Organization" schema="public" table="organization">
-    <comment>Îðãàíèçàöèÿ</comment>
-    <id name="idOrganization" type="int">
-      <column name="id_organization"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.onebutton.db.hibernate.RefArea" fetch="select" name="refArea">
-      <column name="id_area">
-        <comment>ññûëêà íà ðåãèîí</comment>
-      </column>
-    </many-to-one>
-    <property name="shortNameOrg" type="string">
-      <column name="short_name_org">
-        <comment>Ñîêðàùåííîå íàçâàíèå
-                îðãàíèçàöèè</comment>
-      </column>
-    </property>
-    <property name="fullNameOrg" type="string">
-      <column name="full_name_org">
-        <comment>Ïîëíîå íàçâàíèå
-                îðãàíèçàöèè</comment>
-      </column>
-    </property>
-    <set inverse="true" name="persons">
-      <key>
-        <column name="id_organization">
-          <comment>ññûëêà íà îðãàíèçàöèþ</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Person"/>
-    </set>
-    <set inverse="true" name="adverts">
-      <key>
-        <column name="id_organization">
-          <comment>ññûëêà íà îðãàíèçàöèþ</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
-    </set>
-  </class>
+    <class name="com.onebutton.db.hibernate.Organization" table="organization" schema="public">
+        <comment>&#206;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#255;</comment>
+        <id name="idOrganization" type="int">
+            <column name="id_organization" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="refArea" class="com.onebutton.db.hibernate.RefArea" fetch="select">
+            <column name="id_area">
+                <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#240;&#229;&#227;&#232;&#238;&#237;</comment>
+            </column>
+        </many-to-one>
+        <property name="shortNameOrg" type="string">
+            <column name="short_name_org">
+                <comment>&#209;&#238;&#234;&#240;&#224;&#249;&#229;&#237;&#237;&#238;&#229; &#237;&#224;&#231;&#226;&#224;&#237;&#232;&#229;
+                &#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#232;</comment>
+            </column>
+        </property>
+        <property name="fullNameOrg" type="string">
+            <column name="full_name_org">
+                <comment>&#207;&#238;&#235;&#237;&#238;&#229; &#237;&#224;&#231;&#226;&#224;&#237;&#232;&#229;
+                &#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#232;</comment>
+            </column>
+        </property>
+        <set name="persons" inverse="true">
+            <key>
+                <column name="id_organization">
+                    <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#254;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Person" />
+        </set>
+        <set name="adverts" inverse="true">
+            <key>
+                <column name="id_organization">
+                    <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#254;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Advert" />
+        </set>
+    </class>
 </hibernate-mapping>

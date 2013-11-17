@@ -1,46 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.Customer" schema="public" table="customer">
-    <comment>ïîëüçîâàòåëü</comment>
-    <id name="idCustomer" type="int">
-      <column name="id_customer"/>
-      <generator class="increment"/>
-    </id>
-    <many-to-one class="com.onebutton.db.hibernate.Person" fetch="select" name="person">
-      <column name="id_person"/>
-    </many-to-one>
-    <many-to-one class="com.onebutton.db.hibernate.RefRole" fetch="select" name="refRole">
-      <column name="id_role"/>
-    </many-to-one>
-    <property name="login" type="string">
-      <column name="login"/>
-    </property>
-    <property name="password" type="string">
-      <column name="password"/>
-    </property>
-    <property name="email" type="string">
-      <column name="email"/>
-    </property>
-    <property name="isDelite" type="java.lang.Boolean">
-      <column name="is_delite"/>
-    </property>
-    <set inverse="true" name="adverts">
-      <key>
-        <column name="id_user">
-          <comment>ññûëêà íà ïîëüçîâàòåëÿ</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Advert"/>
-    </set>
-    <set inverse="true" name="persons">
-      <key>
-        <column name="id_user">
-          <comment>ññûëêà íà ïîëüçîâàòåëÿ</comment>
-        </column>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Person"/>
-    </set>
-  </class>
+    <class name="com.onebutton.db.hibernate.Customer" table="customer" schema="public">
+        <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+        <id name="idCustomer" type="int">
+            <column name="id_customer" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="person" class="com.onebutton.db.hibernate.Person" fetch="select">
+            <column name="id_person" />
+        </many-to-one>
+        <many-to-one name="refRole" class="com.onebutton.db.hibernate.RefRole" fetch="select">
+            <column name="id_role" />
+        </many-to-one>
+        <property name="login" type="string">
+            <column name="login" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="isDelite" type="java.lang.Boolean">
+            <column name="is_delite" />
+        </property>
+        <property name="isActivated" type="java.lang.Boolean">
+            <column name="is_activated">
+                <comment>&#192;&#234;&#242;&#232;&#226;&#232;&#231;&#232;&#240;&#238;&#226;&#224;&#237;&#224; &#243;&#247;&#229;&#242;&#237;&#224;&#255;
+                &#231;&#224;&#239;&#232;&#241;&#252; (1- &#224;&#234;&#242;&#232;&#226;&#232;&#231;&#232;&#240;&#238;&#226;&#224;&#237;&#224;, 0
+                -&#232;&#237;&#224;&#247;&#229;)</comment>
+            </column>
+        </property>
+        <set name="adverts" inverse="true">
+            <key>
+                <column name="id_user">
+                    <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Advert" />
+        </set>
+        <set name="persons" inverse="true">
+            <key>
+                <column name="id_user">
+                    <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Person" />
+        </set>
+    </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class RefRole  implements java.io.Serializable {
 
      private int idRole;
      private String name;
-     private Set customers = new HashSet(0);
+     private Set<Customer> customers = new HashSet<Customer>(0);
 
     public RefRole() {
     }
@@ -22,7 +22,7 @@ public class RefRole  implements java.io.Serializable {
     public RefRole(int idRole) {
         this.idRole = idRole;
     }
-    public RefRole(int idRole, String name, Set customers) {
+    public RefRole(int idRole, String name, Set<Customer> customers) {
        this.idRole = idRole;
        this.name = name;
        this.customers = customers;
@@ -42,11 +42,11 @@ public class RefRole  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getCustomers() {
+    public Set<Customer> getCustomers() {
         return this.customers;
     }
     
-    public void setCustomers(Set customers) {
+    public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
 

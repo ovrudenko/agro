@@ -1,49 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.10.2013 16:11:28 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.11.2013 14:13:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.onebutton.db.hibernate.Person" schema="public" table="person">
-    <comment>Ïðîôèëü ïîëüçîâàòåëÿ</comment>
-    <id name="idPerson" type="int">
-      <column name="id_person"/>
-      <generator class="increment"/>
-    </id>
-    <many-to-one class="com.onebutton.db.hibernate.Organization" fetch="select" name="organization">
-      <column name="id_organization">
-        <comment>ññûëêà íà îðãàíèçàöèþ</comment>
-      </column>
-    </many-to-one>
-    <many-to-one class="com.onebutton.db.hibernate.Customer" fetch="select" name="customer">
-      <column name="id_user">
-        <comment>ññûëêà íà ïîëüçîâàòåëÿ</comment>
-      </column>
-    </many-to-one>
-    <property name="name" type="string">
-      <column name="name">
-        <comment>Èìÿ ïîëüçîâàòåëÿ</comment>
-      </column>
-    </property>
-    <property name="surname" type="string">
-      <column name="surname">
-        <comment>Ôàìèëèÿ ïîëüçîâàòåëÿ</comment>
-      </column>
-    </property>
-    <property name="patrenemic" type="string">
-      <column name="patrenemic">
-        <comment>Îò÷åñòâî ïîëüçîâàòåëÿ</comment>
-      </column>
-    </property>
-    <set inverse="true" name="customers">
-      <key>
-        <column name="id_person"/>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Customer"/>
-    </set>
-    <set inverse="true" name="telephones">
-      <key>
-        <column name="id_person"/>
-      </key>
-      <one-to-many class="com.onebutton.db.hibernate.Telephone"/>
-    </set>
-  </class>
+    <class name="com.onebutton.db.hibernate.Person" table="person" schema="public">
+        <comment>&#207;&#240;&#238;&#244;&#232;&#235;&#252; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+        <id name="idPerson" type="int">
+            <column name="id_person" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="organization" class="com.onebutton.db.hibernate.Organization" fetch="select">
+            <column name="id_organization">
+                <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#254;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="customer" class="com.onebutton.db.hibernate.Customer" fetch="select">
+            <column name="id_user">
+                <comment>&#241;&#241;&#251;&#235;&#234;&#224; &#237;&#224; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>&#200;&#236;&#255; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+            </column>
+        </property>
+        <property name="surname" type="string">
+            <column name="surname">
+                <comment>&#212;&#224;&#236;&#232;&#235;&#232;&#255; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+            </column>
+        </property>
+        <property name="patrenemic" type="string">
+            <column name="patrenemic">
+                <comment>&#206;&#242;&#247;&#229;&#241;&#242;&#226;&#238; &#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#255;</comment>
+            </column>
+        </property>
+        <set name="customers" inverse="true">
+            <key>
+                <column name="id_person" />
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Customer" />
+        </set>
+        <set name="telephones" inverse="true">
+            <key>
+                <column name="id_person" />
+            </key>
+            <one-to-many class="com.onebutton.db.hibernate.Telephone" />
+        </set>
+    </class>
 </hibernate-mapping>

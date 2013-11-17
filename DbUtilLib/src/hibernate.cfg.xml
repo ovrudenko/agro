@@ -20,5 +20,6 @@
     <mapping resource="com/onebutton/db/hibernate/Telephone.hbm.xml"/>
     <mapping resource="com/onebutton/db/hibernate/StatAdvertActuality.hbm.xml"/>
     <mapping resource="com/onebutton/db/hibernate/RefArea.hbm.xml"/>
+    <mapping resource="com/onebutton/db/hibernate/RefSmtpAddress.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

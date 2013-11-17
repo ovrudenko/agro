@@ -9,6 +9,7 @@
   <class name="com.onebutton.db.hibernate.RefArea" table="ref_area"/>
   <class name="com.onebutton.db.hibernate.RefProduct" table="ref_product"/>
   <class name="com.onebutton.db.hibernate.RefRole" table="ref_role"/>
+  <class name="com.onebutton.db.hibernate.RefSmtpAddress" table="ref_smtp_address"/>
   <class name="com.onebutton.db.hibernate.RefVolumeType" table="ref_volume_type"/>
   <class name="com.onebutton.db.hibernate.StatAdvertActuality" table="stat_advert_actuality"/>
   <class name="com.onebutton.db.hibernate.StatAdvertStory" table="stat_advert_story"/>

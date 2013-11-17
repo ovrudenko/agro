@@ -1,5 +1,5 @@
 package com.onebutton.db.hibernate;
-// Generated 13.10.2013 16:11:27 by Hibernate Tools 3.2.1.GA
+// Generated 17.11.2013 14:13:39 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,8 +15,8 @@ public class Organization  implements java.io.Serializable {
      private RefArea refArea;
      private String shortNameOrg;
      private String fullNameOrg;
-     private Set persons = new HashSet(0);
-     private Set adverts = new HashSet(0);
+     private Set<Person> persons = new HashSet<Person>(0);
+     private Set<Advert> adverts = new HashSet<Advert>(0);
 
     public Organization() {
     }
@@ -25,7 +25,7 @@ public class Organization  implements java.io.Serializable {
     public Organization(int idOrganization) {
         this.idOrganization = idOrganization;
     }
-    public Organization(int idOrganization, RefArea refArea, String shortNameOrg, String fullNameOrg, Set persons, Set adverts) {
+    public Organization(int idOrganization, RefArea refArea, String shortNameOrg, String fullNameOrg, Set<Person> persons, Set<Advert> adverts) {
        this.idOrganization = idOrganization;
        this.refArea = refArea;
        this.shortNameOrg = shortNameOrg;
@@ -62,18 +62,18 @@ public class Organization  implements java.io.Serializable {
     public void setFullNameOrg(String fullNameOrg) {
         this.fullNameOrg = fullNameOrg;
     }
-    public Set getPersons() {
+    public Set<Person> getPersons() {
         return this.persons;
     }
     
-    public void setPersons(Set persons) {
+    public void setPersons(Set<Person> persons) {
         this.persons = persons;
     }
-    public Set getAdverts() {
+    public Set<Advert> getAdverts() {
         return this.adverts;
     }
     
-    public void setAdverts(Set adverts) {
+    public void setAdverts(Set<Advert> adverts) {
         this.adverts = adverts;
     }
 
