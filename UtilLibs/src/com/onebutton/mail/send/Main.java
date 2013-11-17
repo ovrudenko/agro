@@ -18,9 +18,10 @@ public class Main {
 
     public static void main(String[] args) {
         User user = new User("marina", "password", "Марина Михайловна", "Рыбина", "tote.sadom@gmail.com");
-        Letter letter = new ProfileActivationLetter(user);
+        Letter letter = new ProfileActivationLetter();
         SystemMailParameter param = new SystemMailParameter("agromir_robot@mail.ru", user.geteMail(), "smtp.mail.ru");
-        Message message = letter.constructLetter();
+        String[] params = new String[]{user.getName(), user.getLogin(), user.getPassword(), ""};
+        Message message = letter.constructLetter(params);
         MailSender sender = new MailSenderImpl(message, param);
     }
 }

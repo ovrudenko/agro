@@ -17,13 +17,8 @@ import java.util.List;
  * @author lolka
  */
 public class ProfileActivationLetter extends Letter {
-
-    private User user;
+    
     private HeaderParameter header;
-
-    public ProfileActivationLetter(User user) {
-        this.user = user;
-    }
 
     @Override
     public HeaderParameter constructHeaders() {
@@ -40,12 +35,14 @@ public class ProfileActivationLetter extends Letter {
     }
 
     @Override
-    public String constructBody() {
-        return "Уважаемый(ая), " + user.getName() + "!\n "
+    public String constructBody(String ... args) {
+        return "Уважаемый(ая), " + args[0] + "!\n"
                 + "Поздравляем Вас с успешной регистрацией на электронной торговой площадке Арго!\n "
-                + "Ваш логин: " + user.getLogin() + "\n "
-                + "Ваш пароль: " + user.getPassword() + "\n "
-                + "Желаем Вам успешной торговли! \n "
+                + "Ваш логин: " + args[1] + "\n"
+                + "Ваш пароль: " + args[2] + "\n"
+                + "Для активации Вашего профиля нажмите ссылку: \n"
+                + args[3] + "\n"
+                + "Желаем Вам успешной торговли! \n"
                 + "С уважением,\n "
                 + "Администрация agromir.org";
     }

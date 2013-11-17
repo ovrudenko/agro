@@ -16,8 +16,8 @@ import java.util.List;
 public abstract class Letter {    
     
     /** В этом методе комбинируем вызовы нижеописанных методов */
-    public  Message constructLetter(){
-        return new MessageImpl(constructHeaders(), constructSubject(), constructBody(), constructAttachments());
+    public  Message constructLetter(String[] args){
+        return new MessageImpl(constructHeaders(), constructSubject(), constructBody(args), constructAttachments());
     }
     
     public abstract HeaderParameter constructHeaders();
@@ -26,7 +26,7 @@ public abstract class Letter {
     public abstract String constructSubject();
     
     /** Составляем тело сообщения в зависимости о ситуации */
-    public abstract String constructBody();
+    public abstract String constructBody(String[] args);
     
     /** Собираем вложения в список. В списке может быть и только 1 вложение */
     public abstract List<Attachment> constructAttachments();
