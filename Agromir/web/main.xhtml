@@ -13,7 +13,7 @@
                 <tr>
                     <td align="right">
                         <h:panelGroup>
-                            <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="login">   
+                            <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">   
                                 <p:graphicImage value="/resources/images/login.png" />  
                             </h:outputLink>  
                             <p:growl id="growl" showDetail="true" life="3000" />  
@@ -23,11 +23,11 @@
                                 <h:panelGrid columns="2" cellpadding="5">  
                                     <h:outputLabel for="username" value="Логин:" />  
                                     <p:inputText value="#{registrationUserBean.login}"   
-                                                 id="username" required="true" label="username" />  
+                                                 id="username1" required="false" label="username" />  
 
                                     <h:outputLabel for="password" value="Пароль:" />  
                                     <h:inputSecret value="#{registrationUserBean.password}"   
-                                                   id="password" required="true" label="password" />  
+                                                   id="password1" required="false" label="password" />  
 
                                     <f:facet name="footer">  
                                         <p:commandButton id="loginButton" value="Войти" update="growl"   
@@ -37,7 +37,40 @@
                                 </h:panelGrid>  
 
                             </p:dialog>  
-                            |<h:commandLink value="Регистрация" action="/registration.xhtml"/>
+                            <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация">   
+                                <h:outputText value="Регистрация"/>
+                            </h:outputLink>
+                            <p:growl id="growlReg" showDetail="true" life="3000" />
+                            <p:dialog id="dialogReg" header="Регистрация нового пользователя" widgetVar="dlg2" resizable="false">  
+
+                                <h:panelGrid columns="2" cellpadding="5">  
+                                    <h:outputLabel for="username" value="Логин:" />  
+                                    <p:inputText value="#{registrationUserBean.login}"   
+                                                 id="username" required="true" label="username" />  
+
+                                    <h:outputLabel for="password" value="Пароль:" />  
+                                    <h:inputSecret value="#{registrationUserBean.password}"   
+                                                   id="password" required="true" label="password" />  
+                                    <h:outputLabel for="confirmPassword" value="Повторите пароль:" />  
+                                    <h:inputSecret value="#{registrationUserBean.confirmPassword}"   
+                                                   id="confirmPassword" required="true" label="confirmPassword" />
+                                    <h:outputLabel for="email" value="e-mail:" />  
+                                    <p:inputText value="#{registrationUserBean.EMail}"   
+                                                 id="email" required="true" label="email" />
+                                    <h:outputLabel for="name" value="Имя:" />  
+                                    <p:inputText value="#{registrationUserBean.name}"   
+                                                 id="name" required="true" label="name" />
+                                    <h:outputLabel for="surname" value="Фамилия:" />  
+                                    <p:inputText value="#{registrationUserBean.surname}"   
+                                                 id="surname" required="true" label="surname" />
+                                    <f:facet name="footer">  
+                                        <p:commandButton id="regButton" value="Регистрация" update="growlReg"   
+                                                         actionListener="#{registrationUserBean.registration}"   
+                                                         oncomplete="handleRegistryRequest(xhr, status, args)"/>  
+                                    </f:facet>  
+                                </h:panelGrid>  
+
+                            </p:dialog>  
                         </h:panelGroup>
                     </td>
                 </tr>
@@ -129,6 +162,16 @@
                 else {  
                     PF('dlg').hide();  
                     $('#loginLink').fadeOut();  
+                }  
+            }  
+            
+            function handleRegistryRequest(xhr, status, args) {  
+                if(!args.registry) {  
+                    PF('dlg2').jq.effect("shake", { times:5 }, 100);  
+                }   
+                else {  
+                    PF('dlg2').hide();  
+                    $('#regestry').fadeOut();  
                 }  
             }  
         </script>  

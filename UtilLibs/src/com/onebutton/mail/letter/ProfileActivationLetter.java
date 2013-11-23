@@ -41,7 +41,7 @@ public class ProfileActivationLetter extends Letter {
                 + "Ваш логин: " + args[1] + "\n"
                 + "Ваш пароль: " + args[2] + "\n"
                 + "Для активации Вашего профиля нажмите ссылку: \n"
-                + args[3] + "\n"
+                + "<a href=\"#\">" + args[3] + "</a>\n"
                 + "Желаем Вам успешной торговли! \n"
                 + "С уважением,\n "
                 + "Администрация agromir.org";

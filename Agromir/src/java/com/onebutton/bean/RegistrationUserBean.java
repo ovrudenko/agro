@@ -23,8 +23,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -35,13 +38,14 @@ import javax.faces.bean.SessionScoped;
 public class RegistrationUserBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String login;
-    private String password;
+    private String login = "";
+    private String password = "";
     private String name;
     private String surname;
     private String eMail;
     private String confirmPassword;
     private boolean openRegistrForm;
+    private boolean registry;
 
     public boolean isOpenRegistrForm() {
         return openRegistrForm;
@@ -108,6 +112,10 @@ public class RegistrationUserBean implements Serializable {
     }
 
     public void registration() {
+        System.out.println("REG!!!");
+        registry = false;
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
         if (password.equals(confirmPassword)) {
             try {
                 String hashPassword = PasswordHash.createHash(password);
@@ -125,20 +133,50 @@ public class RegistrationUserBean implements Serializable {
                 personQuery.insert(person);
                 AuthUserService us = new AuthUserService(login, password, name, surname, eMail);
                 us.sendConfirmLetter();
+                registry = true;
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Регистрация прошла успешно!", "Уведомление отправлено Вам на почту");
+
+
             } catch (NoSuchAlgorithmException ex) {
+                registry = false;
+                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Невозможно создать пользователя!");
+
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
+
             } catch (InvalidKeySpecException ex) {
+                registry = false;
+                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Невозможно создать пользователя!");
+
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-            System.out.println("Пароли совпали!");
         } else {
+            registry = false;
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Пароли не совпали!", "Невозможно создать пользователя!");
+
             System.out.println("Пароли не совпадают");
+
         }
-
-    }
-    
-    public void enter(){
-        
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("registry", registry);
     }
 
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public boolean isRegistry() {
+        return registry;
+    }
+
+    public void setRegistry(boolean registry) {
+        this.registry = registry;
+    }
+
+    public void enter() {
+    }
 }
