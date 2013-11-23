@@ -136,5 +136,9 @@ public class RegistrationUserBean implements Serializable {
         }
 
     }
+    
+    public void enter(){
+        
+    }
 
 }

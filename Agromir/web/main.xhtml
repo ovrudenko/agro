@@ -2,119 +2,136 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <script type="text/javascript" src="./resources/libs/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="./resources/scripts/auth.js"></script>
     </h:head>
     <h:body>
-        <div id="ololo">
-            <h:form>
-                <table width="100%">
-                    <tr>
-                        <td align="right">
-                            <h:panelGroup>
-                                <div id="enter">
-                                    <h:commandLink id="qqq" value="Вход"/>
+        <h:form>
+            <table width="100%">
+                <tr>
+                    <td align="right">
+                        <h:panelGroup>
+                            <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="login">   
+                                <p:graphicImage value="/resources/images/login.png" />  
+                            </h:outputLink>  
+                            <p:growl id="growl" showDetail="true" life="3000" />  
 
-                                    <div id="login" action="">
-                                        <div>
-                                            <label for="username">Логин:</label>
-                                            <input name="username" id="username" type="text"/>
-                                        </div>
-                                        <div>
-                                            <label for="password">Пароль:</label>
-                                            <input name="password" id="password" type="password"/>
-                                        </div>
-                                        <div>
-                                            <input type="submit" value="Войти" />
-                                        </div>
-                                    </div></div>|<h:commandLink value="Регистрация" action="/registration.xhtml"/>
-                            </h:panelGroup>
-                        </td>
-                    </tr>
-                </table>   
-                <table width="100%">
-                    <tr>
-                        <td align="left">
-                            <h:panelGrid columns="2">
-                                <h:dataTable value="#{mainPageBean.gropedTypes}" var="types">
-                                    <h:column>
-                                        <!-- column header -->
-                                        <f:facet name="header">Тип</f:facet>
-                                        <!-- row record -->
-                                        #{types.name}
-                                    </h:column>
-                                    <h:column>
-                                        <!-- column header -->
-                                        <f:facet name="header">Количество</f:facet>
-                                        <!-- row record -->
-                                        #{types.count}
-                                    </h:column>
-                                </h:dataTable>
+                            <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false">  
 
-                            </h:panelGrid>
-                        </td>
-                        <td>
-                            <h:panelGrid columns="1">
-                                <h:outputLabel>Поиск по объявлениям </h:outputLabel>
+                                <h:panelGrid columns="2" cellpadding="5">  
+                                    <h:outputLabel for="username" value="Логин:" />  
+                                    <p:inputText value="#{registrationUserBean.login}"   
+                                                 id="username" required="true" label="username" />  
 
-                                <h:inputText value="Введите ключевое слово для поиска" size="50"></h:inputText>
-                                <h:selectOneRadio layout="horisontal">
-                                    <f:selectItem itemLabel="Куплю"></f:selectItem>
-                                    <f:selectItem itemLabel="Продам"></f:selectItem>
-                                </h:selectOneRadio>
-                                <h:commandButton value="Поиск"></h:commandButton>
-                            </h:panelGrid>
-                        </td>
-                        <td>
-                            <h:outputLabel>Статистика сайта</h:outputLabel>
-                            <br/>
-                            <table>
-                                <tr>
-                                    <th></th>
-                                    <th></th>                    
-                                </tr>
-                                <tr>
-                                    <td>Новых объявлений</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td>Новых пользователей</td>
-                                    <td>80</td>
-                                </tr>
-                            </table>
-                        </td>
+                                    <h:outputLabel for="password" value="Пароль:" />  
+                                    <h:inputSecret value="#{registrationUserBean.password}"   
+                                                   id="password" required="true" label="password" />  
 
-                    </tr>
-                    <tr>
-                        <!--  <td></td>
-                          <td>${mainPageBean.advertText}</td>
-                          <td><8885dddddddddddddddddddddddddddddddddddddddddddddddddddd8    ilh/td>-->
-                        <h:dataTable rows="10" value="#{mainPageBean.lastAddedAdverts}" var="o">
-                            <h:column>
-                                <!-- column header -->
-                                <f:facet name="header">Объявление</f:facet>
-                                <!-- row record -->
-                                #{o.text}
-                            </h:column>
-                            <h:column>
-                                <!-- column header -->
-                                <f:facet name="header">Дата добавления</f:facet>
-                                <!-- row record -->
-                                #{o.dateCreate}
-                            </h:column>
-                        </h:dataTable>
-                    </tr>
-                    <tr><td></td>
-                        <td>Наши контакты...<br/>
-                            телефон: 123-45-67 <br/>
-                            e-mail: argo@mail.ru</td>
-                        <td></td></tr>
-                </table>
-            </h:form>
-        </div>
+                                    <f:facet name="footer">  
+                                        <p:commandButton id="loginButton" value="Войти" update="growl"   
+                                                         actionListener="#{registrationUserBean.enter}"   
+                                                         oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                                    </f:facet>  
+                                </h:panelGrid>  
+
+                            </p:dialog>  
+                            |<h:commandLink value="Регистрация" action="/registration.xhtml"/>
+                        </h:panelGroup>
+                    </td>
+                </tr>
+            </table>   
+            <table width="100%">
+                <tr>
+                    <td align="left">
+                        <h:panelGrid columns="2">
+                            <h:dataTable value="#{mainPageBean.gropedTypes}" var="types">
+                                <h:column>
+                                    <!-- column header -->
+                                    <f:facet name="header">Тип</f:facet>
+                                    <!-- row record -->
+                                    #{types.name}
+                                </h:column>
+                                <h:column>
+                                    <!-- column header -->
+                                    <f:facet name="header">Количество</f:facet>
+                                    <!-- row record -->
+                                    #{types.count}
+                                </h:column>
+                            </h:dataTable>
+
+                        </h:panelGrid>
+                    </td>
+                    <td>
+                        <h:panelGrid columns="1">
+                            <h:outputLabel>Поиск по объявлениям </h:outputLabel>
+
+                            <h:inputText value="Введите ключевое слово для поиска" size="50"></h:inputText>
+                            <h:selectOneRadio layout="horisontal">
+                                <f:selectItem itemLabel="Куплю"></f:selectItem>
+                                <f:selectItem itemLabel="Продам"></f:selectItem>
+                            </h:selectOneRadio>
+                            <h:commandButton value="Поиск"></h:commandButton>
+                        </h:panelGrid>
+                    </td>
+                    <td>
+                        <h:outputLabel>Статистика сайта</h:outputLabel>
+                        <br/>
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th></th>                    
+                            </tr>
+                            <tr>
+                                <td>Новых объявлений</td>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <td>Новых пользователей</td>
+                                <td>80</td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+                <tr>
+                    <!--  <td></td>
+                      <td>${mainPageBean.advertText}</td>
+                      <td><8885dddddddddddddddddddddddddddddddddddddddddddddddddddd8    ilh/td>-->
+                    <h:dataTable rows="10" value="#{mainPageBean.lastAddedAdverts}" var="o">
+                        <h:column>
+                            <!-- column header -->
+                            <f:facet name="header">Объявление</f:facet>
+                            <!-- row record -->
+                            #{o.text}
+                        </h:column>
+                        <h:column>
+                            <!-- column header -->
+                            <f:facet name="header">Дата добавления</f:facet>
+                            <!-- row record -->
+                            #{o.dateCreate}
+                        </h:column>
+                    </h:dataTable>
+                </tr>
+                <tr><td></td>
+                    <td>Наши контакты...<br/>
+                        телефон: 123-45-67 <br/>
+                        e-mail: argo@mail.ru</td>
+                    <td></td></tr>
+            </table>
+        </h:form>
+        <script type="text/javascript">  
+            function handleLoginRequest(xhr, status, args) {  
+                if(args.validationFailed || !args.loggedIn) {  
+                    PF('dlg').jq.effect("shake", { times:5 }, 100);  
+                }   
+                else {  
+                    PF('dlg').hide();  
+                    $('#loginLink').fadeOut();  
+                }  
+            }  
+        </script>  
     </h:body>
 </html>
 
