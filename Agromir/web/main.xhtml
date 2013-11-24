@@ -14,7 +14,7 @@
                     <td align="right">
                         <h:panelGroup>
                             <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">   
-                                <p:graphicImage value="/resources/images/login.png" />  
+                                <h:outputText value="Вход"/>
                             </h:outputLink>  
                             <p:growl id="growl" showDetail="true" life="3000" />  
 
@@ -33,10 +33,12 @@
                                         <p:commandButton id="loginButton" value="Войти" update="growl"   
                                                          actionListener="#{registrationUserBean.enter}"   
                                                          oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                                        <p:commandButton id="cancelAuth" value="Отмена" onclick="closeAuth();"/>
                                     </f:facet>  
                                 </h:panelGrid>  
 
-                            </p:dialog>  
+                            </p:dialog> 
+                            |
                             <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация">   
                                 <h:outputText value="Регистрация"/>
                             </h:outputLink>
@@ -67,6 +69,7 @@
                                         <p:commandButton id="regButton" value="Регистрация" update="growlReg"   
                                                          actionListener="#{registrationUserBean.registration}"   
                                                          oncomplete="handleRegistryRequest(xhr, status, args)"/>  
+                                        <p:commandButton id="cancel" value="Отмена" onclick="closeReg();"/>
                                     </f:facet>  
                                 </h:panelGrid>  
 
@@ -173,7 +176,17 @@
                     PF('dlg2').hide();  
                     $('#regestry').fadeOut();  
                 }  
-            }  
+            }
+            
+            function closeReg(){
+                PF('dlg2').hide();  
+                $('#regestry').fadeOut();
+            }
+            
+            function closeAuth(){
+                PF('dlg').hide();  
+                $('#loginLink').fadeOut();
+            }
         </script>  
     </h:body>
 </html>
