@@ -46,8 +46,9 @@ public class RegistrationUserBean implements Serializable {
     private String confirmPassword;
     private boolean openRegistrForm;
     private boolean registry;
-    private RequestContext context = RequestContext.getCurrentInstance();
+    private RequestContext context;
     private FacesMessage msg = null;
+    private boolean auth;
 
     public boolean isOpenRegistrForm() {
         return openRegistrForm;
@@ -114,7 +115,7 @@ public class RegistrationUserBean implements Serializable {
     }
 
     public void registration() {
-        System.out.println("REG!!!");
+        context = RequestContext.getCurrentInstance();
         registry = false;
 
         if (password.equals(confirmPassword)) {
@@ -193,5 +194,44 @@ public class RegistrationUserBean implements Serializable {
     }
 
     public void enter() {
+        context = RequestContext.getCurrentInstance();
+        validateUserBeforeEnter();
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("auth", auth);
+    }
+    
+    private boolean validateUserBeforeEnter(){
+        auth = false;
+        if (!"".equals(login)){
+            CustomerCRUD customerCrud = new CustomerCRUD();
+            Customer customer = customerCrud.getCustomerByLogin(login);
+            if (customer != null){
+                try {
+                    String hashPassword = customer.getPassword();
+                    if (PasswordHash.validatePassword(password, hashPassword)){
+                        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Добро, пожаловать!", "Авторизация прошла успешно!");
+                        auth = true;
+                        return auth;
+                    }else{
+                        msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Введен некорретный пароль!");
+                        return auth;
+                    }
+                } catch (NoSuchAlgorithmException ex) {
+                    msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Не удалось осуществить вход в систему!");
+                    Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
+                    return auth;
+                } catch (InvalidKeySpecException ex) {
+                    msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Не удалось осуществить вход в систему!");
+                    Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
+                    return auth;
+                }
+            }else{
+                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Пользователя с таким логином не существует!");
+                return auth;
+            }
+        }else{
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Логин не введен!");
+            return auth;
+        }
     }
 }
