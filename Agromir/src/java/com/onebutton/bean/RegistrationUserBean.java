@@ -46,6 +46,8 @@ public class RegistrationUserBean implements Serializable {
     private String confirmPassword;
     private boolean openRegistrForm;
     private boolean registry;
+    private RequestContext context = RequestContext.getCurrentInstance();
+    private FacesMessage msg = null;
 
     public boolean isOpenRegistrForm() {
         return openRegistrForm;
@@ -114,28 +116,30 @@ public class RegistrationUserBean implements Serializable {
     public void registration() {
         System.out.println("REG!!!");
         registry = false;
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
+
         if (password.equals(confirmPassword)) {
             try {
                 String hashPassword = PasswordHash.createHash(password);
                 Customer customer = new Customer();
                 customer.setEmail(eMail);
                 customer.setLogin(login);
-                customer.setPassword(hashPassword);
-                CustomerCRUD customerQuery = new CustomerCRUD();
-                customerQuery.insert(customer);
-                Person person = new Person();
-                person.setName(name);
-                person.setSurname(surname);
-                person.setCustomer(customer);
-                PersonQueries personQuery = new PersonQueries();
-                personQuery.insert(person);
-                AuthUserService us = new AuthUserService(login, password, name, surname, eMail);
-                us.sendConfirmLetter();
-                registry = true;
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Регистрация прошла успешно!", "Уведомление отправлено Вам на почту");
-
+                if (validateNewUserData()) {
+                    customer.setPassword(hashPassword);
+                    CustomerCRUD customerQuery = new CustomerCRUD();
+                    customerQuery.insert(customer);
+                    Person person = new Person();
+                    person.setName(name);
+                    person.setSurname(surname);
+                    person.setCustomer(customer);
+                    PersonQueries personQuery = new PersonQueries();
+                    personQuery.insert(person);
+                    AuthUserService us = new AuthUserService(login, password, name, surname, eMail);
+                    us.sendConfirmLetter();
+                    registry = true;
+                    msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Регистрация прошла успешно!", "Уведомление отправлено Вам на почту");
+                } else{
+                    registry = false;
+                }
 
             } catch (NoSuchAlgorithmException ex) {
                 registry = false;
@@ -154,11 +158,22 @@ public class RegistrationUserBean implements Serializable {
             registry = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Пароли не совпали!", "Невозможно создать пользователя!");
 
-            System.out.println("Пароли не совпадают");
-
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("registry", registry);
+    }
+
+    private boolean validateNewUserData() {
+        CustomerCRUD customerCrud = new CustomerCRUD();
+        if (customerCrud.getCustomerByLogin(login) != null) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Пользователь с таким логином уже существует!");
+            return false;
+        }
+        if (customerCrud.getCustomerByEMail(eMail) != null) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Пользователь с таким e-mail уже существует!");
+            return false;
+        }
+        return true;
     }
 
     public String geteMail() {

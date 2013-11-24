@@ -66,6 +66,7 @@ public class RefSmtpAddressQueries implements RefSmtpAddressDAO {
         Criterion smtpserverName = Restrictions.eq("domainName",
                 smtpAddress.getDomainName());
         criteria.add(smtpserverName);
+        sessionClose();
         return criteria.list();
     }
 }

@@ -57,6 +57,7 @@ public class RefAdvertTypeQueries implements RefAdvertTypeDAO {
 //        criteria.setProjection(proList);
 //        //sessionClose();
 //        return criteria.setResultTransformer(Transformers.aliasToBean(RefAdvertTypeEntity.class)).list();
+        sessionClose();
         return criteria.list();
     }
 
@@ -66,6 +67,7 @@ public class RefAdvertTypeQueries implements RefAdvertTypeDAO {
         Criterion criterion = Restrictions.eq("refAdvertType", 
                 new RefAdvertType(idAdvType));
         criteria.add(criterion);
+        sessionClose();
         return criteria.list();
     }
 }

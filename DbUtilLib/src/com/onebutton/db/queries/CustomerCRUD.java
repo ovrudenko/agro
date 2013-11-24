@@ -72,5 +72,25 @@ public class CustomerCRUD implements CustomerDAO {
     public void delete(Customer customer) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public Customer getCustomerByLogin(String login) {
+        Criteria criteria = getSession().createCriteria(Customer.class);
+        Criterion customerLogin = Restrictions.eq("login", login);
+        criteria.add(customerLogin);
+        Customer customer = (Customer) criteria.uniqueResult();
+        sessionClose();
+        return customer;
+    }
+
+    @Override
+    public Customer getCustomerByEMail(String eMail) {
+        Criteria criteria = getSession().createCriteria(Customer.class);
+        Criterion customerEmail = Restrictions.eq("email", eMail);
+        criteria.add(customerEmail);
+        Customer customer = (Customer) criteria.uniqueResult();
+        sessionClose();
+        return customer;
+    }
     
 }

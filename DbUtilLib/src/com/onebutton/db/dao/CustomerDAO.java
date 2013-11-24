@@ -15,4 +15,6 @@ public interface CustomerDAO {
     public void update(Customer customer);
     public void delete(Customer customer);
     public Customer getCustomerById(int id);
+    public Customer getCustomerByLogin(String login);
+    public Customer getCustomerByEMail(String eMail);
 }
