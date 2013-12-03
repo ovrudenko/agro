@@ -14,4 +14,5 @@
   <class name="com.onebutton.db.hibernate.StatAdvertActuality" table="stat_advert_actuality"/>
   <class name="com.onebutton.db.hibernate.StatAdvertStory" table="stat_advert_story"/>
   <class name="com.onebutton.db.hibernate.Telephone" table="telephone"/>
+  <class name="com.onebutton.db.hibernate.Person" table="person"/>
 </hibernate-mapping>

@@ -7,3 +7,9 @@
 /UtilLibs/dist
 /UtilLibs/build
 /UtilLibs/nbproject
+/Agromir/lib
+/DbUtilLib/lib
+/UtilLibs/lib
+/Agromir/nbbuild.xml
+/DbUtilLib/nbbuild.xml
+/UtilLibs/nbbuild.xml
