@@ -8,14 +8,14 @@ and open the template in the editor.
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Регистрация нового пользователя</title>
         <meta name="viewport" content="width=device-width"/>
     </head>
     <h:body>
         <h:form>
-           <h:panelGrid columns="2">
+            <h:panelGrid columns="2" id="registrGrid">
                     <h:outputLabel>Логин</h:outputLabel>
                     <h:inputText value="#{registrationUserBean.login}" size="30"></h:inputText>
                     <h:outputLabel>Пароль</h:outputLabel>
@@ -28,7 +28,7 @@ and open the template in the editor.
                     <h:inputText value="#{registrationUserBean.surname}" size="30"></h:inputText>
                     <h:outputLabel>Имя</h:outputLabel>
                     <h:inputText value="#{registrationUserBean.name}" size="30"></h:inputText>
-                    <h:commandButton value="Регистрация" action="#{registrationUserBean.registration}"></h:commandButton>
+                    <p:commandButton value="Регистрация" action="#{registrationUserBean.registration}" update="registrGrid"/>
                 </h:panelGrid>
         </h:form>
     </h:body>
