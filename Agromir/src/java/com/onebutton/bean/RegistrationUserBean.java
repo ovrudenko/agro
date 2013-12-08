@@ -177,10 +177,12 @@ public class RegistrationUserBean implements Serializable {
     private boolean validateNewUserData() {
         CustomerCRUD customerCrud = new CustomerCRUD();
         if (customerCrud.getCustomerByLogin(login) != null) {
+            System.out.println("такой есть");
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Пользователь с таким логином уже существует!");
             return false;
         }
         if (customerCrud.getCustomerByEMail(eMail) != null) {
+            System.out.println("email повторился");
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Пользователь с таким e-mail уже существует!");
             return false;
         }
@@ -205,10 +207,10 @@ public class RegistrationUserBean implements Serializable {
 
     public void enter() {
         System.out.println("enter ");
-        //context = RequestContext.getCurrentInstance();
-        //validateUserBeforeEnter();
-       // FacesContext.getCurrentInstance().addMessage(null, msg);
-       // context.addCallbackParam("auth", auth);
+        context = RequestContext.getCurrentInstance();
+        validateUserBeforeEnter();
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("auth", auth);
     }
     
     private boolean validateUserBeforeEnter(){
@@ -221,7 +223,8 @@ public class RegistrationUserBean implements Serializable {
                 System.out.println("Login found");
                 try {
                     String hashPassword = customer.getPassword();
-                    if (PasswordHash.validatePassword(password, hashPassword)){
+                    System.out.println(hashPassword);
+                    if (PasswordHash.validatePassword(password, hashPassword.trim())){
                         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Добро, пожаловать!", "Авторизация прошла успешно!");
                         auth = true;
                         idUser = customer.getIdCustomer();
@@ -253,5 +256,9 @@ public class RegistrationUserBean implements Serializable {
             idUser = 0;
             return auth;
         }
+    }
+    
+    public void exit(){
+        idUser = 0;
     }
 }

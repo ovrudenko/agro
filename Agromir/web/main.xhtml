@@ -13,7 +13,7 @@
                 <tr>
                     <td align="right">
                         <h:panelGroup>
-                            <h:panelGrid columns="3" rendered="#{registrationUserBean.idUser == 0}">
+                            <h:panelGrid id="none" columns="3" rendered="#{registrationUserBean.idUser == 0}">
                                 <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">
                                     <h:outputText value="Вход"/>
                                 </h:outputLink>  
@@ -23,41 +23,40 @@
                                 </h:outputLink>
                             </h:panelGrid>
 
-                            <h:panelGrid columns="3" rendered="#{registrationUserBean.idUser > 0}">
+                            <h:panelGrid id="auth" columns="3" rendered="#{registrationUserBean.idUser > 0}">
                                 <h:commandLink id="loginName">
                                     <h:outputText value="#{registrationUserBean.login}"/>
                                 </h:commandLink>
                                 |
-                                <h:commandLink id="exit">
+                                <p:commandLink id="exit" action="#{registrationUserBean.exit}" update="none auth">
                                     <h:outputText value="Выход"/>
-                                </h:commandLink>
+                                </p:commandLink>
                             </h:panelGrid>
 
 
                             <p:growl id="growl" showDetail="true" life="3000" />
 
-                            <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false" modal="true">
+                            <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false">  
 
-                                <h:panelGrid columns="2" cellpadding="5" id="loginGrid">
-                                    <h:outputLabel for="username" value="Логин:" />
-                                    <p:inputText value="#{registrationUserBean.login}"
-                                                 id="username1" required="false" label="username" />
+                                <h:panelGrid id="loginGrid" columns="2" cellpadding="5">  
+                                    <h:outputLabel for="username" value="Логин:" />  
+                                    <p:inputText value="#{registrationUserBean.login}"   
+                                                 id="enterUsername" required="true" label="username" />  
 
-                                    <h:outputLabel for="password" value="Пароль:" />
-                                    <p:password value="#{registrationUserBean.password}"
-                                                id="password1" required="false" label="password" />
+                                    <h:outputLabel for="password" value="Парль:" />  
+                                    <h:inputSecret value="#{registrationUserBean.password}"   
+                                                   id="enterPassword" required="true" label="password" />  
 
-                                    <f:facet name="footer">
-                                        <p:commandButton id="loginButton" value="Войти"
-                                                         actionListener="#{registrationUserBean.enter}"
-                                                         oncomplete="handleLoginRequest(xhr, status, args)"
-                                                         update="loginGrid"/>
-                                        <p:commandButton id="cancelAuth" value="Отмена" onclick="closeAuth();"/>
-                                    </f:facet>
-                                </h:panelGrid>
+                                    <f:facet name="footer">  
+                                        <p:commandButton id="loginButton" value="Войти" update="growl none auth" 
+                                                         actionListener="#{registrationUserBean.enter}"   
+                                                         oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                                    </f:facet>  
+                                </h:panelGrid>  
 
-                            </p:dialog>
+                            </p:dialog>  
 
+                            <p:growl id="growlReg" showDetail="true" life="3000" />
                             <p:growl id="growlReg" showDetail="true" life="3000" />
                             <p:dialog id="dialogReg" header="Регистрация нового пользователя" widgetVar="dlg2" resizable="false" modal="true">
 
@@ -89,7 +88,7 @@
                                     </f:facet>  
                                 </h:panelGrid>  
 
-                            </p:dialog>  
+                            </p:dialog>
                         </h:panelGroup>
                     </td>
                 </tr>

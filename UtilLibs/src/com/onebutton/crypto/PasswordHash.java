@@ -166,8 +166,8 @@ public class PasswordHash {
      *
      * @param args ignored
      */
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
+     /*   try {
             // Print out 10 hashes
             for (int i = 0; i < 10; i++) {
                 System.out.println(PasswordHash.createHash("p\r\nassw0Rd!"));
@@ -201,7 +201,9 @@ public class PasswordHash {
             }
         } catch (Exception ex) {
             System.out.println("ERROR: " + ex);
-        }
+        }*/
+        System.out.println(createHash("123"));
+        
     }
 
 }
