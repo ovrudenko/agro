@@ -49,6 +49,15 @@ public class RegistrationUserBean implements Serializable {
     private RequestContext context;
     private FacesMessage msg = null;
     private boolean auth;
+    private int idUser;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 
     public boolean isOpenRegistrForm() {
         return openRegistrForm;

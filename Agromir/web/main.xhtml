@@ -13,36 +13,51 @@
                 <tr>
                     <td align="right">
                         <h:panelGroup>
-                            <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">   
-                                <h:outputText value="Вход"/>
-                            </h:outputLink>  
-                            <p:growl id="growl" showDetail="true" life="3000" />  
+                            <h:panelGrid columns="3" rendered="#{registrationUserBean.idUser == 0}">
+                                <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">
+                                    <h:outputText value="Вход"/>
+                                </h:outputLink>  
+                                |
+                                <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация">
+                                    <h:outputText value="Регистрация"/>
+                                </h:outputLink>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="3" rendered="#{registrationUserBean.idUser > 0}">
+                                <h:commandLink id="loginName">
+                                    <h:outputText value="#{registrationUserBean.login}"/>
+                                </h:commandLink>
+                                |
+                                <h:commandLink id="exit">
+                                    <h:outputText value="Выход"/>
+                                </h:commandLink>
+                            </h:panelGrid>
+
+
+                            <p:growl id="growl" showDetail="true" life="3000" />
 
                             <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false" modal="true">
 
                                 <h:panelGrid columns="2" cellpadding="5" id="loginGrid">
-                                    <h:outputLabel for="username" value="Логин:" />  
-                                    <p:inputText value="#{registrationUserBean.login}"   
-                                                 id="username1" required="false" label="username" />  
+                                    <h:outputLabel for="username" value="Логин:" />
+                                    <p:inputText value="#{registrationUserBean.login}"
+                                                 id="username1" required="false" label="username" />
 
-                                    <h:outputLabel for="password" value="Пароль:" />  
+                                    <h:outputLabel for="password" value="Пароль:" />
                                     <p:password value="#{registrationUserBean.password}"
-                                                   id="password1" required="false" label="password" />  
+                                                id="password1" required="false" label="password" />
 
-                                    <f:facet name="footer">  
+                                    <f:facet name="footer">
                                         <p:commandButton id="loginButton" value="Войти"
-                                                         actionListener="#{registrationUserBean.enter}"   
+                                                         actionListener="#{registrationUserBean.enter}"
                                                          oncomplete="handleLoginRequest(xhr, status, args)"
                                                          update="loginGrid"/>
                                         <p:commandButton id="cancelAuth" value="Отмена" onclick="closeAuth();"/>
-                                    </f:facet>  
-                                </h:panelGrid>  
+                                    </f:facet>
+                                </h:panelGrid>
 
-                            </p:dialog> 
-                            |
-                            <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация">   
-                                <h:outputText value="Регистрация"/>
-                            </h:outputLink>
+                            </p:dialog>
+
                             <p:growl id="growlReg" showDetail="true" life="3000" />
                             <p:dialog id="dialogReg" header="Регистрация нового пользователя" widgetVar="dlg2" resizable="false" modal="true">
 
