@@ -125,7 +125,7 @@ public class RegistrationUserBean implements Serializable {
 
     public void registration() {
         context = RequestContext.getCurrentInstance();
-        registry = false;
+        auth = false;
         System.out.println("111");
         if (password.equals(confirmPassword)) {
             System.out.println("совпали");
@@ -146,32 +146,32 @@ public class RegistrationUserBean implements Serializable {
                     personQuery.insert(person);
                     AuthUserService us = new AuthUserService(login, password, name, surname, eMail);
                     us.sendConfirmLetter();
-                    registry = true;
+                    auth = true;
                     msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Регистрация прошла успешно!", "Уведомление отправлено Вам на почту");
                 } else{
-                    registry = false;
+                    auth = false;
                 }
 
             } catch (NoSuchAlgorithmException ex) {
-                registry = false;
+                auth = false;
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Невозможно создать пользователя!");
 
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
 
             } catch (InvalidKeySpecException ex) {
-                registry = false;
+                auth = false;
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка регистрации!", "Невозможно создать пользователя!");
 
                 Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
 
             }
         } else {
-            registry = false;
+            auth = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Пароли не совпали!", "Невозможно создать пользователя!");
 
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("registry", registry);
+        context.addCallbackParam("auth", auth);
     }
 
     private boolean validateNewUserData() {
@@ -260,5 +260,20 @@ public class RegistrationUserBean implements Serializable {
     
     public void exit(){
         idUser = 0;
+        auth = true;
     }
+
+    public boolean isAuth() {
+        System.out.println(auth);
+        return auth;
+    }
+    
+    public void authClick(){
+        auth = true;
+    }
+    
+    public void regClick(){
+        auth = false;
+    }
+    
 }
