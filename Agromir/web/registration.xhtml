@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <h:form >
+            <h:panelGrid columns="2" cellpadding="5" id="regGrid">
+                <h:outputLabel for="username" value="Логин:" />  
+                <p:inputText value="#{registrationUserBean.login}"   
+                             id="username" required="true" label="username" />  
+
+                <h:outputLabel for="password" value="Пароль:" />  
+                <p:password value="#{registrationUserBean.password}"
+                            id="password" required="true" label="password" />
+                <h:outputLabel for="confirmPassword" value="Повторите пароль:" />  
+                <p:password value="#{registrationUserBean.confirmPassword}"
+                            id="confirmPassword" required="true" label="confirmPassword" />
+                <h:outputLabel for="email" value="e-mail:" />  
+                <p:inputText value="#{registrationUserBean.EMail}"   
+                             id="email" required="true" label="email" />
+                <h:outputLabel for="name" value="Имя:" />  
+                <p:inputText value="#{registrationUserBean.name}"   
+                             id="name" required="true" label="name" />
+                <h:outputLabel for="surname" value="Фамилия:" />  
+                <p:inputText value="#{registrationUserBean.surname}"   
+                             id="surname" required="true" label="surname" />
+                <f:facet name="footer">  
+                    <p:commandButton id="regButton" value="Регистрация"
+                                     actionListener="#{registrationUserBean.registration}"   
+                                     oncomplete="handleRegistryRequest(xhr, status, args)"/>  
+                    <p:commandButton id="cancel" value="Отмена" onclick="closeReg();" action="main" immediate="true"/>
+                </f:facet>  
+            </h:panelGrid>  
+        </h:form>
+    </h:body>
+</html>
+

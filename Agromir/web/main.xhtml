@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
     </h:head>
@@ -15,13 +16,16 @@
                         <h:panelGroup>
                             <p:outputPanel id="agroForm">
                                 <h:panelGrid id="none"  columns="3" rendered="#{registrationUserBean.idUser==0}">
-                                    <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход">
+                                    <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="Вход"  >
                                         <h:outputText value="Вход"/>
                                     </h:outputLink>  
                                     |
-                                    <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация" binding="#{registrationUserBean.regClick}">
-                                        <h:outputText value="Регистрация"/>
-                                    </h:outputLink>
+                                    <h:commandLink value="Регистрация" action="registration" />
+                                    <ui:remove>
+                                        <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация" >
+                                            <h:outputText value="Регистрация"/>
+                                        </h:outputLink>
+                                    </ui:remove>
                                 </h:panelGrid>
 
                                 <h:panelGrid id="auth" columns="3" rendered="#{registrationUserBean.idUser!=0}">
@@ -37,20 +41,20 @@
 
                             <!--     <p:growl id="growl" showDetail="true" life="3000" />-->
                             <p:growl id="growlReg" showDetail="true" life="3000" />
-                            <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false" rendered="#{registrationUserBean.auth}">  
+                            <p:dialog id="dialog" header="Вход в систему" widgetVar="dlg" resizable="false" >  
 
                                 <h:panelGrid id="loginGrid" columns="2" cellpadding="5">  
 
                                     <h:outputLabel for="username" value="Логин:" />  
                                     <p:inputText value="#{registrationUserBean.login}"   
-                                                 id="enterUsername" required="true" label="username" />  
+                                                 id="enterUsername" required="false" label="username" />  
 
                                     <h:outputLabel for="password" value="Парль:" />  
                                     <h:inputSecret value="#{registrationUserBean.password}"   
-                                                   id="enterPassword" required="true" label="password" />  
+                                                   id="enterPassword" required="false" label="password" />  
 
                                     <f:facet name="footer">  
-                                        <p:commandButton id="loginButton" value="Войти" update="agroForm, growlReg" 
+                                        <p:commandButton id="loginButton" value="Войти" update="agroForm, growlReg, panelReg" 
                                                          actionListener="#{registrationUserBean.enter}"   
                                                          oncomplete="handleLoginRequest(xhr, status, args)" >  
 
@@ -61,25 +65,29 @@
 
                             </p:dialog> 
                         </h:panelGroup>
-                        <p:outputPanel>
-                            <p:growl id="growl" showDetail="true" life="3000" />
-                            <p:dialog id="dialogReg" header="Регистрация нового пользователя" widgetVar="dlg2" resizable="false" modal="true" rendered="#{!registrationUserBean.auth}">
 
-                                <h:panelGrid columns="2" cellpadding="5" id="regGrid">
-                                    <h:outputLabel for="username" value="Логин:" />  
-                                    <p:inputText value="#{registrationUserBean.login}"   
-                                                 id="username" required="true" label="username" />  
-                                    
-                                    <f:facet name="footer">  
-                                        <p:commandButton id="regButton" value="Регистрация" update="regGrid"
-                                                         actionListener="#{registrationUserBean.registration}"   
-                                                         oncomplete="handleRegistryRequest(xhr, status, args)" />  
-                                        <p:commandButton id="cancel" value="Отмена" onclick="closeReg();"/>
-                                    </f:facet>  
-                                </h:panelGrid>  
+                        <p:outputPanel rendered="#{registrationUserBean.registry}" id="panelReg">
+                            <ui:remove>
+                                <p:growl id="growl" showDetail="true" life="3000" />
+                                <p:dialog id="dialogReg" header="Регистрация нового пользователя" widgetVar="dlg2" resizable="false" modal="true" >
 
-                            </p:dialog> 
+                                    <h:panelGrid columns="2" cellpadding="5" id="regGrid">
+                                        <h:outputLabel for="username" value="Логин:" />  
+                                        <p:inputText value="#{registrationUserBean.login}"   
+                                                     id="username" required="false" label="username" />  
+
+                                        <f:facet name="footer">  
+                                            <p:commandButton id="regButton" value="Регистрация" update="regGrid"
+                                                             actionListener="#{registrationUserBean.registration}"   
+                                                             oncomplete="handleRegistryRequest(xhr, status, args)" />  
+                                            <p:commandButton id="cancel" value="Отмена" onclick="closeReg();"/>
+                                        </f:facet>  
+                                    </h:panelGrid>  
+
+                                </p:dialog> 
+                            </ui:remove>
                         </p:outputPanel>
+
                     </td>
                 </tr>
             </table>   

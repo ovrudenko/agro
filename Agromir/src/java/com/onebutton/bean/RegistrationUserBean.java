@@ -45,7 +45,7 @@ public class RegistrationUserBean implements Serializable {
     private String eMail;
     private String confirmPassword;
     private boolean openRegistrForm;
-    private boolean registry;
+    private boolean registry=true;
     private RequestContext context;
     private FacesMessage msg = null;
     private boolean auth;
@@ -206,6 +206,7 @@ public class RegistrationUserBean implements Serializable {
     }
 
     public void enter() {
+        registry = false;
         System.out.println("enter ");
         context = RequestContext.getCurrentInstance();
         validateUserBeforeEnter();
@@ -233,34 +234,39 @@ public class RegistrationUserBean implements Serializable {
                     }else{
                         msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Введен некорретный пароль!");
                         idUser = 0;
+                        registry = true;
                         return auth;
                     }
                 } catch (NoSuchAlgorithmException ex) {
                     msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Не удалось осуществить вход в систему!");
                     Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
                     idUser = 0;
+                    registry = true;
                     return auth;
                 } catch (InvalidKeySpecException ex) {
                     msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Не удалось осуществить вход в систему!");
                     Logger.getLogger(RegistrationUserBean.class.getName()).log(Level.SEVERE, null, ex);
                     idUser = 0;
+                    registry = true;
                     return auth;
                 }
             }else{
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Пользователя с таким логином не существует!");
                 idUser = 0;
+                registry = true;
                 return auth;
             }
         }else{
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Логин не введен!");
             idUser = 0;
+            registry = true;
             return auth;
         }
     }
     
     public void exit(){
         idUser = 0;
-        auth = true;
+        registry = true;
     }
 
     public boolean isAuth() {
@@ -269,7 +275,7 @@ public class RegistrationUserBean implements Serializable {
     }
     
     public void authClick(){
-        auth = true;
+        registry = false;
     }
     
     public void regClick(){
