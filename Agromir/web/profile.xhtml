@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <h:form >
+            <table width="100%">
+                <tr>
+                    <td align="right">
+                        <h:panelGroup>
+                            <p:outputPanel id="agroForm">
+
+                                <h:panelGrid id="auth" columns="3" rendered="#{registrationUserBean.idUser!=0}">
+                                    <h:commandLink id="loginName" action="profile">
+                                        <h:outputText value="#{registrationUserBean.login}"/>
+                                    </h:commandLink>
+                                    |
+                                    <p:commandLink id="exit" action="#{registrationUserBean.exit}" update="agroForm" >
+                                        <h:outputText value="Выход"/>
+                                    </p:commandLink>
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGroup>
+                    </td>
+                </tr>
+            </table>   
+
+            <h3>Личный профиль</h3>
+            <p:outputPanel id="profileGrid">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Имя"/>
+                    <h:outputText rendered="#{!profile.edit}"/>
+                    <p:inputText rendered="#{profile.edit}"/>
+                    <h:outputText value="Фамилия"/>
+                    <h:outputText rendered="#{!profile.edit}"/>
+                    <p:inputText rendered="#{profile.edit}"/>
+                    <h:outputText value="Регион"/>
+                    <h:outputText rendered="#{!profile.edit}"/>
+                    <p:inputText rendered="#{profile.edit}"/>
+                    <h:outputText value="Частное лицо"/>
+                    <h:selectBooleanCheckbox/>
+                    <h:outputText value="Организация"/>
+                    <h:outputText rendered="#{!profile.edit}"/>
+                    <p:inputText rendered="#{profile.edit}"/>
+
+                    <p:commandButton value="Назад" action="main?faces-redirect=true" rendered="#{!profile.edit}"/>
+                    <p:commandButton value="Редактировать" rendered="#{!profile.edit}"
+                                     action="#{profile.openEdit}" update="profileGrid"/>
+
+                    <p:commandButton value="Сохранить" rendered="#{profile.edit}"/>
+                    <p:commandButton value="Отменить" rendered="#{profile.edit}"
+                                     action="#{profile.closeEdit}" update="profileGrid"/>
+
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:form>
+    </h:body>
+</html>
+

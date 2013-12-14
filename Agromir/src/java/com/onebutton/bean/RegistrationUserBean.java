@@ -264,9 +264,10 @@ public class RegistrationUserBean implements Serializable {
         }
     }
     
-    public void exit(){
+    public String exit(){
         idUser = 0;
         registry = true;
+        return "main";
     }
 
     public boolean isAuth() {
