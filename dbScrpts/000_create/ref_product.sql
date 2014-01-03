@@ -1,7 +1,3 @@
-﻿-- Table: ref_product
-
--- DROP TABLE ref_product;
-
 CREATE TABLE ref_product
 (
   id_product serial NOT NULL,

@@ -1,4 +1,4 @@
-﻿-- Table: stat_advert_actuality
+-- Table: stat_advert_actuality
 
 -- DROP TABLE stat_advert_actuality;
 

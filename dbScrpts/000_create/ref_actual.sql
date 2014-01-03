@@ -1,7 +1,3 @@
-﻿-- Table: ref_actual
-
--- DROP TABLE ref_actual;
-
 CREATE TABLE ref_actual
 (
   id_actual serial NOT NULL,

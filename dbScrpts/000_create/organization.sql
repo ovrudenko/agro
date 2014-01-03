@@ -1,7 +1,3 @@
-﻿-- Table: organization
-
--- DROP TABLE organization;
-
 CREATE TABLE organization
 (
   id_organization serial NOT NULL,

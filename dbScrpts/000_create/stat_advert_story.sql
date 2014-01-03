@@ -1,10 +1,7 @@
-﻿-- Table: stat_advert_story
-
--- DROP TABLE stat_advert_story;
-
+CREATE SEQUENCE advert_story_id_adv_story_seq;
 CREATE TABLE stat_advert_story
 (
-  id_adv_story integer NOT NULL DEFAULT nextval('advert_story_id_adv_story_seq'::regclass), -- id истории сообщения
+  id_adv_story integer NOT NULL DEFAULT nextval('advert_story_id_adv_story_seq'), -- id истории сообщения
   id_advert integer NOT NULL, -- ссылка на сообщение
   date timestamp with time zone, -- дата записи
   min_price money, -- минимальная цена
@@ -24,6 +21,7 @@ CREATE TABLE stat_advert_story
 WITH (
   OIDS=TRUE
 );
+ALTER SEQUENCE advert_story_id_adv_story_seq OWNED BY stat_advert_story.id_adv_story;
 ALTER TABLE stat_advert_story
   OWNER TO postgres;
 COMMENT ON COLUMN stat_advert_story.id_adv_story IS 'id истории сообщения';

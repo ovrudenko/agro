@@ -1,7 +1,3 @@
-﻿-- Table: customer
-
--- DROP TABLE customer;
-
 CREATE TABLE customer
 (
   id_customer serial NOT NULL, -- id пользователя

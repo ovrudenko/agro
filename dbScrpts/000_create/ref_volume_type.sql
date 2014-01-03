@@ -1,7 +1,3 @@
-﻿-- Table: ref_volume_type
-
--- DROP TABLE ref_volume_type;
-
 CREATE TABLE ref_volume_type
 (
   id_volume_type serial NOT NULL, -- id типа

@@ -1,7 +1,3 @@
-﻿-- Table: ref_smtp_address
-
--- DROP TABLE ref_smtp_address;
-
 CREATE TABLE ref_smtp_address
 (
   domain_name text,

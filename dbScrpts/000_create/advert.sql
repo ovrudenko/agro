@@ -1,4 +1,4 @@
-﻿-- Table: advert
+-- Table: advert
 
 -- DROP TABLE advert;
 

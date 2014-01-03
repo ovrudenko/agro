@@ -1,7 +1,3 @@
-﻿-- Table: person
-
--- DROP TABLE person;
-
 CREATE TABLE person
 (
   id_person serial NOT NULL, -- id профиля
@@ -13,10 +9,11 @@ CREATE TABLE person
   CONSTRAINT person_pkey1 PRIMARY KEY (id_person ),
   CONSTRAINT person_id_organization_fkey FOREIGN KEY (id_organization)
       REFERENCES organization (id_organization) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT person_id_user_fkey FOREIGN KEY (id_user)
-      REFERENCES customer (id_customer) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
+	  --,
+  --CONSTRAINT person_id_user_fkey FOREIGN KEY (id_user)
+    --  REFERENCES customer (id_customer) MATCH SIMPLE
+   --   ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=TRUE
