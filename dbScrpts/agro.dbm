@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" protected="true" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<database name="agro" encoding="UTF8" lc-collate="Russian, Russia" lc-ctype="Russian, Russia">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<sequence name="advert_type_id_adv_type_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_advert_type" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="50" y="50"/>
+	<column name="id_adv_type" not-null="true" default-value="nextval('advert_type_id_adv_type_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id С‚РёРїР° СЃРѕРѕР±С‰РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+		<comment><![CDATA[РЅР°Р·РІР°РЅРёРµ С‚РёРїР°]]></comment>
+	</column>
+	<constraint name="advert_type_pkey" type="pk-constr" factor="100" table="public.ref_advert_type">
+		<columns names="id_adv_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="area_id_area_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_area" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="270" y="345"/>
+	<column name="id_area" not-null="true" default-value="nextval('area_id_area_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[Р РµРіРёРѕРЅ]]></comment>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+		<comment><![CDATA[РЅР°Р·РІР°РЅРёРµ СЂРµРіРёРѕРЅР°]]></comment>
+	</column>
+	<constraint name="area_pkey" type="pk-constr" factor="100" table="public.ref_area">
+		<columns names="id_area" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="ref_product_id_product_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_product" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="665" y="50"/>
+	<column name="id_product" not-null="true" default-value="nextval('ref_product_id_product_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+	</column>
+	<constraint name="ref_product_pkey" type="pk-constr" factor="100" table="public.ref_product">
+		<columns names="id_product" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="ref_actual_id_actual_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_actual" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1134" y="701"/>
+	<column name="id_actual" not-null="true" default-value="nextval('ref_actual_id_actual_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+	</column>
+	<constraint name="ref_actual_pkey" type="pk-constr" factor="100" table="public.ref_actual">
+		<columns names="id_actual" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="ref_smtp_address_id_ref_smtp_address_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_smtp_address">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<comment><![CDATA[РЎРїСЂР°РІРѕС‡РЅРёРє email РґРѕРјРµРЅРѕРІ Рё smtp СЃРµСЂРІРµСЂРѕРІ]]></comment>
+	<position x="1495" y="73"/>
+	<column name="domain_name">
+		<type name="text"/>
+	</column>
+	<column name="smtp_server_name">
+		<type name="text"/>
+	</column>
+	<column name="id_ref_smtp_address" not-null="true" default-value="nextval('ref_smtp_address_id_ref_smtp_address_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<constraint name="ref_smtp_address_pkey" type="pk-constr" factor="100" table="public.ref_smtp_address">
+		<columns names="id_ref_smtp_address" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="role_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_role" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1542" y="483.4"/>
+	<column name="id_role" not-null="true" default-value="nextval('role_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+	</column>
+	<constraint name="role_pkey" type="pk-constr" factor="100" table="public.ref_role">
+		<columns names="id_role" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="ref_volume_type_id_volume_type_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="ref_volume_type" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="261" y="453.4"/>
+	<column name="id_volume_type" not-null="true" default-value="nextval('ref_volume_type_id_volume_type_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id С‚РёРїР°]]></comment>
+	</column>
+	<column name="short_name">
+		<type name="character varying"/>
+		<comment><![CDATA[СЃРѕРєСЂР°С‰РµРЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ]]></comment>
+	</column>
+	<column name="full_name">
+		<type name="character varying"/>
+		<comment><![CDATA[РїРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ]]></comment>
+	</column>
+	<constraint name="ref_volume_type_pkey" type="pk-constr" factor="100" table="public.ref_volume_type">
+		<columns names="id_volume_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="organization_id_organization_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="organization" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<comment><![CDATA[РћСЂРіР°РЅРёР·Р°С†РёСЏ]]></comment>
+	<position x="924" y="119.4"/>
+	<column name="id_organization" not-null="true" default-value="nextval('organization_id_organization_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="short_name_org">
+		<type name="character varying"/>
+		<comment><![CDATA[РЎРѕРєСЂР°С‰РµРЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё]]></comment>
+	</column>
+	<column name="full_name_org">
+		<type name="character varying"/>
+		<comment><![CDATA[РџРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё]]></comment>
+	</column>
+	<column name="id_area">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° СЂРµРіРёРѕРЅ]]></comment>
+	</column>
+	<constraint name="organization_pkey" type="pk-constr" factor="100" table="public.organization">
+		<columns names="id_organization" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="person_id_person_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="person" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<comment><![CDATA[РџСЂРѕС„РёР»СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	<position x="1098" y="268.4"/>
+	<column name="id_person" not-null="true" default-value="nextval('person_id_person_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id РїСЂРѕС„РёР»СЏ]]></comment>
+	</column>
+	<column name="name">
+		<type name="character varying"/>
+	</column>
+	<column name="surname">
+		<type name="character varying"/>
+		<comment><![CDATA[Р¤Р°РјРёР»РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	</column>
+	<column name="patrenemic">
+		<type name="character varying"/>
+		<comment><![CDATA[РћС‚С‡РµСЃС‚РІРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	</column>
+	<column name="id_user">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	</column>
+	<column name="id_organization">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° РѕСЂРіР°РЅРёР·Р°С†РёСЋ]]></comment>
+	</column>
+	<constraint name="person_pkey1" type="pk-constr" factor="100" table="public.person">
+		<columns names="id_person" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="customer_id_customer_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="customer" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<comment><![CDATA[РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ]]></comment>
+	<position x="1487" y="180.4"/>
+	<column name="id_customer" not-null="true" default-value="nextval('customer_id_customer_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	</column>
+	<column name="login">
+		<type name="character varying"/>
+	</column>
+	<column name="password">
+		<type name="character varying"/>
+	</column>
+	<column name="id_role">
+		<type name="integer"/>
+	</column>
+	<column name="email">
+		<type name="character varying"/>
+	</column>
+	<column name="is_delite">
+		<type name="boolean"/>
+	</column>
+	<column name="id_person">
+		<type name="integer"/>
+	</column>
+	<column name="is_activated">
+		<type name="boolean"/>
+		<comment><![CDATA[РђРєС‚РёРІРёР·РёСЂРѕРІР°РЅР° СѓС‡РµС‚РЅР°СЏ Р·Р°РїРёСЃСЊ (1- Р°РєС‚РёРІРёР·РёСЂРѕРІР°РЅР°, 0 -РёРЅР°С‡Рµ)]]></comment>
+	</column>
+	<constraint name="customer_pkey" type="pk-constr" factor="100" table="public.customer">
+		<columns names="id_customer" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="advert_id_advert_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="advert" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="633" y="598.8"/>
+	<column name="id_advert" not-null="true" default-value="nextval('advert_id_advert_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id РѕР±СЉСЏРІР»РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="id_advert_type">
+		<type name="integer"/>
+		<comment><![CDATA[С‚РёРї СЃРѕРѕР±С‰РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="id_user">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ]]></comment>
+	</column>
+	<column name="id_organization">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° РѕСЂРіР°РЅРёР·Р°С†РёСЋ]]></comment>
+	</column>
+	<column name="text">
+		<type name="text"/>
+		<comment><![CDATA[С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="id_product">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° РЅР°Р·РІР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р°]]></comment>
+	</column>
+	<column name="date_create">
+		<type name="timestamp" with-timezone="true"/>
+		<comment><![CDATA[РґР°С‚Р° СЃРѕР·РґР°РЅРёСЏ РѕР±СЉСЏРІР»РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="is_delete">
+		<type name="boolean"/>
+	</column>
+	<column name="id_area">
+		<type name="integer"/>
+	</column>
+	<constraint name="advert_pkey" type="pk-constr" factor="100" table="public.advert">
+		<columns names="id_advert" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="telephone_id_tel_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="telephone" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1118" y="524.8"/>
+	<column name="id_tel" not-null="true" default-value="nextval('telephone_id_tel_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="id_person">
+		<type name="integer"/>
+	</column>
+	<column name="tel_number">
+		<type name="character varying"/>
+	</column>
+	<constraint name="telephone_pkey" type="pk-constr" factor="100" table="public.telephone">
+		<columns names="id_tel" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="stat_advert_actuality_id_adv_actuality_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="stat_advert_actuality" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1491" y="621.8"/>
+	<column name="id_adv_actuality" not-null="true" default-value="nextval('stat_advert_actuality_id_adv_actuality_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="id_advert">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° СЃРѕРѕР±С‰РµРЅРёРµ]]></comment>
+	</column>
+	<column name="start_date">
+		<type name="timestamp" with-timezone="true"/>
+		<comment><![CDATA[РґР°С‚Р° РЅР°С‡Р°Р»Р°]]></comment>
+	</column>
+	<column name="stop_date">
+		<type name="timestamp" with-timezone="true"/>
+		<comment><![CDATA[РґР°С‚Р° Р·Р°РІРµСЂС€РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="id_actual">
+		<type name="integer"/>
+	</column>
+	<column name="is_delete">
+		<type name="boolean"/>
+	</column>
+	<constraint name="stat_advert_actuality_pkey" type="pk-constr" factor="100" table="public.stat_advert_actuality">
+		<columns names="id_adv_actuality" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="advert_story_id_adv_story_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="stat_advert_story" oids="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="239" y="597.8"/>
+	<column name="id_adv_story" not-null="true" default-value="nextval('advert_story_id_adv_story_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[id РёСЃС‚РѕСЂРёРё СЃРѕРѕР±С‰РµРЅРёСЏ]]></comment>
+	</column>
+	<column name="id_advert" not-null="true">
+		<type name="integer"/>
+		<comment><![CDATA[СЃСЃС‹Р»РєР° РЅР° СЃРѕРѕР±С‰РµРЅРёРµ]]></comment>
+	</column>
+	<column name="date">
+		<type name="timestamp" with-timezone="true"/>
+		<comment><![CDATA[РґР°С‚Р° Р·Р°РїРёСЃРё]]></comment>
+	</column>
+	<column name="min_price">
+		<type name="money"/>
+		<comment><![CDATA[РјРёРЅРёРјР°Р»СЊРЅР°СЏ С†РµРЅР°]]></comment>
+	</column>
+	<column name="max_price">
+		<type name="money"/>
+		<comment><![CDATA[РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ С†РµРЅР°]]></comment>
+	</column>
+	<column name="min_volume">
+		<type name="double precision"/>
+		<comment><![CDATA[РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РѕР±СЉРµРј]]></comment>
+	</column>
+	<column name="max_volume">
+		<type name="double precision"/>
+		<comment><![CDATA[РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РѕР±СЉРµРј]]></comment>
+	</column>
+	<column name="id_volume_type">
+		<type name="integer"/>
+		<comment><![CDATA[Р·РЅР°С‡РµРЅРёРµ РѕР±СЉРµРјР°]]></comment>
+	</column>
+	<column name="is_delete">
+		<type name="boolean"/>
+	</column>
+	<constraint name="advert_story_pkey" type="pk-constr" factor="100" table="public.stat_advert_story">
+		<columns names="id_adv_story" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="organization_id_area_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_area" table="public.organization">
+	<columns names="id_area" ref-type="src-columns"/>
+	<columns names="id_area" ref-type="dst-columns"/>
+</constraint>
+<constraint name="person_id_organization_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.organization" table="public.person">
+	<columns names="id_organization" ref-type="src-columns"/>
+	<columns names="id_organization" ref-type="dst-columns"/>
+</constraint>
+<constraint name="customer_id_person_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.person" table="public.customer">
+	<columns names="id_person" ref-type="src-columns"/>
+	<columns names="id_person" ref-type="dst-columns"/>
+</constraint>
+<constraint name="customer_id_role_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_role" table="public.customer">
+	<columns names="id_role" ref-type="src-columns"/>
+	<columns names="id_role" ref-type="dst-columns"/>
+</constraint>
+<constraint name="advert_id_advert_type_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_advert_type" table="public.advert">
+	<columns names="id_advert_type" ref-type="src-columns"/>
+	<columns names="id_adv_type" ref-type="dst-columns"/>
+</constraint>
+<constraint name="advert_id_area_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_area" table="public.advert">
+	<columns names="id_area" ref-type="src-columns"/>
+	<columns names="id_area" ref-type="dst-columns"/>
+</constraint>
+<constraint name="advert_id_organization_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.organization" table="public.advert">
+	<columns names="id_organization" ref-type="src-columns"/>
+	<columns names="id_organization" ref-type="dst-columns"/>
+</constraint>
+<constraint name="advert_id_product_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_product" table="public.advert">
+	<columns names="id_product" ref-type="src-columns"/>
+	<columns names="id_product" ref-type="dst-columns"/>
+</constraint>
+<constraint name="advert_id_user_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.customer" table="public.advert">
+	<columns names="id_user" ref-type="src-columns"/>
+	<columns names="id_customer" ref-type="dst-columns"/>
+</constraint>
+<constraint name="telephone_id_person_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.person" table="public.telephone">
+	<columns names="id_person" ref-type="src-columns"/>
+	<columns names="id_person" ref-type="dst-columns"/>
+</constraint>
+<constraint name="stat_advert_actuality_id_actual_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_actual" table="public.stat_advert_actuality">
+	<columns names="id_actual" ref-type="src-columns"/>
+	<columns names="id_actual" ref-type="dst-columns"/>
+</constraint>
+<constraint name="stat_advert_actuality_id_advert_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.advert" table="public.stat_advert_actuality">
+	<columns names="id_advert" ref-type="src-columns"/>
+	<columns names="id_advert" ref-type="dst-columns"/>
+</constraint>
+<constraint name="stat_advert_story_id_advert_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.advert" table="public.stat_advert_story">
+	<columns names="id_advert" ref-type="src-columns"/>
+	<columns names="id_advert" ref-type="dst-columns"/>
+</constraint>
+<constraint name="stat_advert_story_id_volume_type_fkey" type="fk-constr"	 comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ref_volume_type" table="public.stat_advert_story">
+	<columns names="id_volume_type" ref-type="src-columns"/>
+	<columns names="id_volume_type" ref-type="dst-columns"/>
+</constraint>
+<relationship name="rel_organization_ref_area" type="relfk"
+	 src-table="public.organization"
+	 dst-table="public.ref_area"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_person_organization" type="relfk"
+	 src-table="public.person"
+	 dst-table="public.organization"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_customer_person" type="relfk"
+	 src-table="public.customer"
+	 dst-table="public.person"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_customer_ref_role" type="relfk"
+	 src-table="public.customer"
+	 dst-table="public.ref_role"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_advert_ref_advert_type" type="relfk"
+	 src-table="public.advert"
+	 dst-table="public.ref_advert_type"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_advert_ref_area" type="relfk"
+	 src-table="public.advert"
+	 dst-table="public.ref_area"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_advert_organization" type="relfk"
+	 src-table="public.advert"
+	 dst-table="public.organization"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_advert_ref_product" type="relfk"
+	 src-table="public.advert"
+	 dst-table="public.ref_product"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_advert_customer" type="relfk"
+	 src-table="public.advert"
+	 dst-table="public.customer"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_telephone_person" type="relfk"
+	 src-table="public.telephone"
+	 dst-table="public.person"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_stat_advert_actuality_ref_actual" type="relfk"
+	 src-table="public.stat_advert_actuality"
+	 dst-table="public.ref_actual"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_stat_advert_actuality_advert" type="relfk"
+	 src-table="public.stat_advert_actuality"
+	 dst-table="public.advert"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_stat_advert_story_advert" type="relfk"
+	 src-table="public.stat_advert_story"
+	 dst-table="public.advert"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_stat_advert_story_ref_volume_type" type="relfk"
+	 src-table="public.stat_advert_story"
+	 dst-table="public.ref_volume_type"
+	 src-required="true" dst-required="true"/>
+
+</dbmodel>
