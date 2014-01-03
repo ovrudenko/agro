@@ -39,8 +39,13 @@ public class MainPageBean implements Serializable{
     }
     
     public String getAdvertText(){
-        Advert adv = getLastAddedAdverts().get(0);
-        return adv.getText();
+        if (getLastAddedAdverts().size() > 0){
+            Advert adv = getLastAddedAdverts().get(0);
+            return adv.getText();
+        }else{
+            return "";
+        }
+        
     }  
     public  List<Advert> getLastAddedAdverts(){
         AdvertService as = new AdvertService();
