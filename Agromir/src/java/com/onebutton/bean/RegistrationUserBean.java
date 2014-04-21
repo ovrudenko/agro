@@ -50,6 +50,7 @@ public class RegistrationUserBean implements Serializable {
     private FacesMessage msg = null;
     private boolean auth;
     private int idUser;
+    private Customer customer;
 
     public int getIdUser() {
         return idUser;
@@ -131,7 +132,7 @@ public class RegistrationUserBean implements Serializable {
             System.out.println("совпали");
             try {
                 String hashPassword = PasswordHash.createHash(password);
-                Customer customer = new Customer();
+                customer = new Customer();
                 customer.setEmail(eMail);
                 customer.setLogin(login);
                 if (validateNewUserData()) {
@@ -280,6 +281,10 @@ public class RegistrationUserBean implements Serializable {
     
     public void regClick(){
         auth = false;
+    }
+    
+    public Customer getCustomer(){
+        return customer;
     }
     
 }

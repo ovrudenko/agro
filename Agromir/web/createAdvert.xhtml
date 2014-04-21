@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        Создание нового объявления
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:outputPanel id="advert">
+                <h:panelGrid  columns="3">
+
+                    <h:selectOneMenu value="#{advertBean.idAdvType}">
+                        <f:selectItems value="#{advertBean.ratList}" var="c"
+                                       itemLabel="#{c.name}" itemValue="#{c.idAdvType}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Регион"></h:outputLabel>
+                    <h:selectOneMenu value="#{advertBean.idProduct}">
+                        <f:selectItems value="#{advertBean.lProd}" var="p"
+                                       itemLabel="#{p.name}" itemValue="#{p.idProduct}" />
+                    </h:selectOneMenu>
+                    <h:inputTextarea cols="100" value="#{advertBean.text}" rows="10">
+
+                    </h:inputTextarea>
+                    <f:facet name="footer">  
+                        <p:commandButton id="regButton" value="Создать"
+                                         actionListener="#{advertBean.createAdvert}" update="advert"/>  
+                        <p:commandButton id="cancel" value="Отмена"  action="main" immediate="true"/>
+                    </f:facet>  
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:form>
+    </h:body>
+</html>

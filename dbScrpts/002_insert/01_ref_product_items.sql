@@ -1,4 +1,3 @@
-delete from ref_product;
 insert into ref_product (id_product, name) values(1, 'Животноводство');
 insert into ref_product (id_product, name) values(2, 'Растениеводство');
 insert into ref_product (id_product, name) values(3, 'Продукция из зерна');

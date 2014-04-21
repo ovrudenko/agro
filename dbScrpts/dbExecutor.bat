@@ -1,7 +1,9 @@
 SET PATH=%PATH%;C:\Program Files\PostgreSQL\9.1\bin;
 SET AGROMIR_HOME=D:\Develope\obs
 SET PGPASSWORD=12345678
+SET client_encoding=UTF-8
 SET CREATE_DB_SCRIPTS_HOME=%AGROMIR_HOME%\dbScrpts\000_create
+SET INSERT_DB_SCRIPTS_HOME=%AGROMIR_HOME%\dbScrpts\002_insert
 psql -h localhost -p 5432 -U postgres -f %CREATE_DB_SCRIPTS_HOME%\0_agro_db_create.sql
 psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\ref_advert_type.sql
 psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\ref_area.sql
@@ -17,4 +19,6 @@ psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\advert
 psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\telephone.sql
 psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\stat_advert_actuality.sql
 psql -h localhost -p 5432 -U postgres -d agro -f %CREATE_DB_SCRIPTS_HOME%\stat_advert_story.sql
+psql -h localhost -p 5432 -U postgres -d agro -f %INSERT_DB_SCRIPTS_HOME%\01_ref_product_items.sql
+psql -h localhost -p 5432 -U postgres -d agro -f %INSERT_DB_SCRIPTS_HOME%\02_ref_advert_type_items.sql
 pause

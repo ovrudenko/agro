@@ -5,7 +5,12 @@
 package com.onebutton.db.queries;
 
 import com.onebutton.db.hibernate.Advert;
+import com.onebutton.db.hibernate.Customer;
+import com.onebutton.db.hibernate.RefAdvertType;
+import com.onebutton.db.hibernate.RefArea;
+import com.onebutton.db.hibernate.RefProduct;
 import com.onebutton.db.params.AdvertParams;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -118,7 +123,7 @@ public class AdvertQueriesTest {
         
     }
     
-    @Test
+   // @Test
     public void testgetAdvertListOrderByDate(){
         AdvertParams p = new AdvertParams();
         p.setLimit(10);
@@ -126,5 +131,26 @@ public class AdvertQueriesTest {
         for (int i = 0; i < adv.size(); i++) {
              System.out.println(adv.get(i));
         }
+    }
+    
+    @Test
+    public void testCreateAdvert(){
+        Advert advert = new Advert();
+        CustomerCRUD customerCRUD = new CustomerCRUD();
+        Customer customer = customerCRUD.getCustomerById(1);
+        advert.setCustomer(customer);
+        advert.setDateCreate(new Date());
+        advert.setOrganization(null);
+        RefAdvertType rat = new RefAdvertType();
+        rat.setIdAdvType(1);
+        advert.setRefAdvertType(rat);
+        //Регионов пока нет
+        advert.setRefArea(null);
+        RefProductCRUD rpcrud = new RefProductCRUD();
+        RefProduct rp = rpcrud.getRefProductById(1);
+        advert.setRefProduct(rp);
+        advert.setText("Куплю корову буренку");
+        AdvertQueries aq = new AdvertQueries();
+        aq.insert(advert);
     }
 }

@@ -1,7 +1,3 @@
--- Table: advert
-
--- DROP TABLE advert;
-
 CREATE TABLE advert
 (
   id_advert serial NOT NULL, -- id объявления

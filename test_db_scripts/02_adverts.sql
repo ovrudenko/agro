@@ -1,5 +1,3 @@
---INSERT INTO advert(id_advert, id_advert_type,  text, id_product, date_create)
---VALUES (8, 2,  'Продаем крупный рогатый скот', 1, CURRENT_TIMESTAMP);
 INSERT INTO advert(id_advert, id_advert_type,  text, id_product, date_create) VALUES (9, 1,  'Организация купит мелкий рогатый скот', 1, CURRENT_TIMESTAMP);
 INSERT INTO advert(id_advert, id_advert_type,  text, id_product, date_create) VALUES (10, 2,  'Продам рассаду', 2, CURRENT_TIMESTAMP);
 INSERT INTO advert(id_advert, id_advert_type,  text, id_product, date_create) VALUES (11, 1,  'Куплю рассаду', 2, CURRENT_TIMESTAMP);

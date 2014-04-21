@@ -431,7 +431,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="stat_advert_story" oids="true">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="239" y="597.8"/>
+	<position x="85" y="603.8"/>
 	<column name="id_adv_story" not-null="true" default-value="nextval('advert_story_id_adv_story_seq'::regclass)">
 		<type name="integer"/>
 		<comment><![CDATA[id РёСЃС‚РѕСЂРёРё СЃРѕРѕР±С‰РµРЅРёСЏ]]></comment>

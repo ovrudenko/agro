@@ -33,7 +33,7 @@
                                         <h:outputText value="#{registrationUserBean.login}"/>
                                     </h:commandLink>
                                     |
-                                    <p:commandLink id="exit" action="#{registrationUserBean.exit}" update="agroForm" >
+                                    <p:commandLink id="exit" action="#{registrationUserBean.exit}" update="agroForm, createAdvLink" >
                                         <h:outputText value="Выход"/>
                                     </p:commandLink>
                                 </h:panelGrid>
@@ -54,7 +54,7 @@
                                                    id="enterPassword" required="false" label="password" />  
 
                                     <f:facet name="footer">  
-                                        <p:commandButton id="loginButton" value="Войти" update="agroForm, growlReg, panelReg" 
+                                        <p:commandButton id="loginButton" value="Войти" update="agroForm, growlReg, panelReg, createAdvLink" 
                                                          actionListener="#{registrationUserBean.enter}"   
                                                          oncomplete="handleLoginRequest(xhr, status, args)" >  
 
@@ -113,7 +113,7 @@
                         </h:panelGrid>
                     </td>
                     <td>
-                        <h:panelGrid columns="1">
+                        <h:panelGrid columns="3">
                             <h:outputLabel>Поиск по объявлениям </h:outputLabel>
 
                             <h:inputText value="Введите ключевое слово для поиска" size="50"></h:inputText>
@@ -122,8 +122,13 @@
                                 <f:selectItem itemLabel="Продам"></f:selectItem>
                             </h:selectOneRadio>
                             <h:commandButton value="Поиск"></h:commandButton>
-                            <h:commandLink rendered="#{registrationUserBean.idUser!=0}" value="Создать новое объявление"></h:commandLink>
+
                         </h:panelGrid>
+                        <p:outputPanel id="createAdvLink">
+                            <h:panelGrid rendered="#{registrationUserBean.idUser!=0}">
+                                <p:commandLink value="Создать новое объявление" action="createAdvert"></p:commandLink>
+                            </h:panelGrid>
+                        </p:outputPanel>
                     </td>
                     <td>
                         <h:outputLabel>Статистика сайта</h:outputLabel>
@@ -171,36 +176,36 @@
                     <td></td></tr>
             </table>
         </h:form>
-        <script type="text/javascript">  
-            function handleLoginRequest(xhr, status, args) {  
-                if(!args.auth) {  
-                    PF('dlg').jq.effect("shake", { times:5 }, 100);  
-                }   
-                else {  
-                    PF('dlg').hide();  
-                    $('#loginLink').fadeOut(); 
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (!args.auth) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
                     $('#none').show();
                     $('#auth').show();
-                }  
-            }  
-            
-            function handleRegistryRequest(xhr, status, args) {  
-                if(!args.auth) {  
-                    PF('dlg2').jq.effect("shake", { times:5 }, 100);  
-                }   
-                else {  
-                    PF('dlg2').hide();  
-                    $('#regestry').fadeOut();  
-                }  
+                }
             }
-            
-            function closeReg(){
-                PF('dlg2').hide();  
+
+            function handleRegistryRequest(xhr, status, args) {
+                if (!args.auth) {
+                    PF('dlg2').jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    PF('dlg2').hide();
+                    $('#regestry').fadeOut();
+                }
+            }
+
+            function closeReg() {
+                PF('dlg2').hide();
                 $('#regestry').fadeOut();
             }
-            
-            function closeAuth(){
-                PF('dlg').hide();  
+
+            function closeAuth() {
+                PF('dlg').hide();
                 $('#loginLink').fadeOut();
             }
         </script>  

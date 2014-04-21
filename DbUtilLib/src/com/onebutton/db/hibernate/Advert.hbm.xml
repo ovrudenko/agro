@@ -6,7 +6,7 @@
     <class name="com.onebutton.db.hibernate.Advert" table="advert" schema="public">
         <id name="idAdvert" type="int">
             <column name="id_advert" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="organization" class="com.onebutton.db.hibernate.Organization" fetch="select">
             <column name="id_organization">

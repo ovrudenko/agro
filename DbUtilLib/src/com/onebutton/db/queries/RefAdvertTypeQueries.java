@@ -51,6 +51,7 @@ public class RefAdvertTypeQueries implements RefAdvertTypeDAO {
     @Override
     public List<RefAdvertType> getRefAdvertTypeList() {
         Criteria criteria = getSession().createCriteria(RefAdvertType.class);
+        List<RefAdvertType> rat = criteria.list();
 //        ProjectionList proList = Projections.projectionList();
 //        proList.add(Projections.property("idAdvType"), "idAdvType");
 //        proList.add(Projections.property("name"), "name");
@@ -58,7 +59,7 @@ public class RefAdvertTypeQueries implements RefAdvertTypeDAO {
 //        //sessionClose();
 //        return criteria.setResultTransformer(Transformers.aliasToBean(RefAdvertTypeEntity.class)).list();
         sessionClose();
-        return criteria.list();
+        return rat;
     }
 
     @Override
