@@ -7,6 +7,7 @@ package com.onebutton.bean;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -17,10 +18,18 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ProfileBean implements Serializable {
 
-    /** Creates a new instance of ProfileBean */
-    public ProfileBean() {}
+
+    @ManagedProperty(value = "#{registrationUserBean}")
+    private RegistrationUserBean registrationUserBean;
+    public void setRegistrationUserBean(RegistrationUserBean newValue) {
+        registrationUserBean = newValue;
+    }
+
+    //public Cas
 
     private boolean edit;
+
+    public ProfileBean() {}
 
     public boolean isEdit() {
         return edit;
