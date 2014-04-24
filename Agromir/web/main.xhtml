@@ -20,7 +20,7 @@
                                         <h:outputText value="Вход"/>
                                     </h:outputLink>  
                                     |
-                                    <h:commandLink value="Регистрация" action="registration" />
+                                    <h:commandLink value="Регистрация" action="registration?faces-redirect=true" />
                                     <ui:remove>
                                         <h:outputLink id="registry" value="javascript:void(0)" onclick="PF('dlg2').show()" title="Регистрация" >
                                             <h:outputText value="Регистрация"/>
@@ -29,7 +29,7 @@
                                 </h:panelGrid>
 
                                 <h:panelGrid id="auth" columns="3" rendered="#{registrationUserBean.idUser!=0}">
-                                    <h:commandLink id="loginName">
+                                    <h:commandLink id="loginName" action="profile">
                                         <h:outputText value="#{registrationUserBean.login}"/>
                                     </h:commandLink>
                                     |
@@ -45,11 +45,11 @@
 
                                 <h:panelGrid id="loginGrid" columns="2" cellpadding="5">  
 
-                                    <h:outputLabel for="username" value="Логин:" />  
+                                    <h:outputLabel for="enterUsername" value="Логин:" />
                                     <p:inputText value="#{registrationUserBean.login}"   
                                                  id="enterUsername" required="false" label="username" />  
 
-                                    <h:outputLabel for="password" value="Парль:" />  
+                                    <h:outputLabel for="enterPassword" value="Парль:" />
                                     <h:inputSecret value="#{registrationUserBean.password}"   
                                                    id="enterPassword" required="false" label="password" />  
 
