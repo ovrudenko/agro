@@ -10,6 +10,7 @@
     <h:body>
         <h:form >
             <h:panelGrid columns="2" cellpadding="5" id="regGrid">
+                
                 <h:outputLabel for="username" value="Логин:" />  
                 <p:inputText value="#{registrationUserBean.login}"   
                              id="username" required="true" label="username" />  
@@ -31,12 +32,13 @@
                              id="surname" required="true" label="surname" />
                 <f:facet name="footer">  
                     <p:commandButton id="regButton" value="Регистрация"
-                                     actionListener="#{registrationUserBean.registration}"   
-                                     oncomplete="handleRegistryRequest(xhr, status, args)"/>  
+                                     action="#{registrationUserBean.registration}"/>  
                     <p:commandButton id="cancel" value="Отмена" onclick="closeReg();" action="main" immediate="true"/>
                 </f:facet>  
             </h:panelGrid>  
+            <p:growl id="growl" showDetail="true" life="3000" />
         </h:form>
+      
     </h:body>
 </html>
 

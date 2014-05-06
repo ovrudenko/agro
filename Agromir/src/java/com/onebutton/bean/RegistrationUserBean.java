@@ -45,7 +45,7 @@ public class RegistrationUserBean implements Serializable {
     private String eMail;
     private String confirmPassword;
     private boolean openRegistrForm;
-    private boolean registry=true;
+    private boolean registry = true;
     private RequestContext context;
     private FacesMessage msg = null;
     private boolean auth;
@@ -124,7 +124,7 @@ public class RegistrationUserBean implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    public void registration() {
+    public String registration() {
         context = RequestContext.getCurrentInstance();
         auth = false;
         System.out.println("111");
@@ -149,7 +149,7 @@ public class RegistrationUserBean implements Serializable {
                     us.sendConfirmLetter();
                     auth = true;
                     msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Регистрация прошла успешно!", "Уведомление отправлено Вам на почту");
-                } else{
+                } else {
                     auth = false;
                 }
 
@@ -172,7 +172,7 @@ public class RegistrationUserBean implements Serializable {
 
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("auth", auth);
+        return "main";
     }
 
     private boolean validateNewUserData() {
@@ -214,25 +214,25 @@ public class RegistrationUserBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("auth", auth);
     }
-    
-    private boolean validateUserBeforeEnter(){
+
+    private boolean validateUserBeforeEnter() {
         auth = false;
         System.out.println("Login");
-        if (!"".equals(login)){
+        if (!"".equals(login)) {
             CustomerCRUD customerCrud = new CustomerCRUD();
-            Customer customer = customerCrud.getCustomerByLogin(login);
-            if (customer != null){
+            customer = customerCrud.getCustomerByLogin(login);
+            if (customer != null) {
                 System.out.println("Login found");
                 try {
                     String hashPassword = customer.getPassword();
                     System.out.println(hashPassword);
-                    if (PasswordHash.validatePassword(password, hashPassword.trim())){
+                    if (PasswordHash.validatePassword(password, hashPassword.trim())) {
                         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Добро, пожаловать!", "Авторизация прошла успешно!");
                         auth = true;
                         idUser = customer.getIdCustomer();
                         System.out.println("idUser " + idUser);
                         return auth;
-                    }else{
+                    } else {
                         msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Введен некорретный пароль!");
                         idUser = 0;
                         registry = true;
@@ -251,21 +251,21 @@ public class RegistrationUserBean implements Serializable {
                     registry = true;
                     return auth;
                 }
-            }else{
+            } else {
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Пользователя с таким логином не существует!");
                 idUser = 0;
                 registry = true;
                 return auth;
             }
-        }else{
+        } else {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка авторизации!", "Логин не введен!");
             idUser = 0;
             registry = true;
             return auth;
         }
     }
-    
-    public String exit(){
+
+    public String exit() {
         idUser = 0;
         registry = true;
         return "main";
@@ -275,17 +275,17 @@ public class RegistrationUserBean implements Serializable {
         System.out.println(auth);
         return auth;
     }
-    
-    public void authClick(){
+
+    public void authClick() {
         registry = false;
     }
-    
-    public void regClick(){
+
+    public void regClick() {
         auth = false;
     }
-    
-    public Customer getCustomer(){
+
+    public Customer getCustomer() {
         return customer;
     }
-    
+
 }
